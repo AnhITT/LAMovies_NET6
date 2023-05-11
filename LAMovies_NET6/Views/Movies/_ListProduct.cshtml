@@ -1,0 +1,30 @@
+﻿@model IEnumerable<LAMovies_NET6.Models.Movie>
+
+@foreach (var item in Model)
+{
+    <li>
+        <div class="movie-card">
+            <a href="#">
+                <figure class="card-banner">
+                    <img src="@item.uriImg">
+                </figure>
+            </a>
+
+            <div class="title-wrapper text-center">
+                <a href="#">
+                    <h3 class="card-title">@item.nameMovie</h3>
+                </a>
+
+            </div>
+
+            <div class="card-meta d-flex justify-content-center">
+                <div class="badge-movie badge-outline">@item.qualityMovie</div>
+
+                <div class="badge-old badge-outline-old">@item.minAgeMovie +</div>
+
+                <div class="badge-time badge-outline-time">@item.timeMovie</div>
+            </div>
+
+        </div>
+    </li>
+}

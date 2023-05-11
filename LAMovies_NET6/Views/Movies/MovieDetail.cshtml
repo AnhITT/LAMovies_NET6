@@ -1,0 +1,80 @@
+﻿
+@{
+    ViewData["Title"] = "MovieDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="movie-detail">
+    <div class="container">
+
+        <figure class="movie-detail-banner">
+            <img src="https://i.imgur.com/fmBaq1J.jpg" alt="Free guy movie poster">
+        </figure>
+
+        <div class="movie-detail-content">
+
+            <p class="detail-subtitle">New Episodes</p>
+
+            <h1 class="h1 detail-title">
+                Free <strong>Guy</strong>
+            </h1>
+
+            <div class="meta-wrapper">
+
+                <div class="badge-wrapper">
+                    <div class="badge badge-fill">PG 13</div>
+
+                    <div class="badge badge-outline">HD</div>
+                </div>
+
+                <div class="ganre-wrapper">
+                    <a href="#">Comedy,</a>
+
+                    <a href="#">Action,</a>
+
+                    <a href="#">Adventure,</a>
+
+                    <a href="#">Science Fiction</a>
+                </div>
+
+                <div class="date-time">
+
+                    <div>
+                        <ion-icon name="calendar-outline"></ion-icon>
+
+                        <time datetime="2021">2021</time>
+                    </div>
+
+                    <div>
+                        <ion-icon name="time-outline"></ion-icon>
+
+                        <time datetime="PT115M">115 min</time>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <p class="storyline">
+                A bank teller called Guy realizes he is a background character in an open world video game called
+                Free
+                City that will
+                soon go offline.
+            </p>
+
+            
+            <div class="d-flex align-items-center r-mb-23" data-animation-in="fadeInUp" data-delay-in="0.5">
+                <a href="show-details.html" class="btn btn-danger iq-button">
+                    <i class="fa-solid fa-play"></i>
+                    Play Now
+                </a>
+                <a href=""
+                   class="video-open btn btn-danger iq-button ml-3">
+                    <i class="fa-solid fa-tv"></i>
+                    Watch Trailer
+                </a>
+            </div>
+        </div>
+
+    </div>
+</section>

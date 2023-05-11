@@ -1,0 +1,280 @@
+﻿@model IEnumerable<LAMovies_NET6.Models.Movie>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<section id="home" class="iq-main-slider p-0">
+    <!-- Slider -->
+    <div id="home-slider" class="slider m-0 p-0">
+        @foreach(var item in Model)
+        {
+            <div style="background-image: url(@item.uriImgCover);" class="slide slick-bg s-bg-1">
+                <div class="container-fluid position-relative h-100">
+                    <div class="slider-inner h-100">
+                        <div class="row align-items-center  h-100">
+                            <div class="col-xl-6 col-lg-12 col-md-12">
+
+                                <h1 class="slider-text big-title title text-uppercase">@item.nameMovie</h1>
+
+                                <div class="d-flex flex-wrap align-items-center fadeInLeft animated" style="opacity: 1;">
+                                    <div class="d-flex align-items-center mt-2 mt-md-3">
+                                        <span class="badge badge-danger p-2">@item.qualityMovie</span>
+                                        <span class="ml-3 badge badge-secondary p-2">@item.minAgeMovie +</span>
+                                        <span class="ml-3">@item.timeMovie</span>
+                                    </div>
+                                </div>
+
+                                <p>
+                                   @item.descriptionMovie
+                                </p>
+                                <div class="trending-list">
+                                    <div class="text-primary title genres">
+                                        Genres: <span class="text-body">Action</span>
+                                    </div>
+                                    <div class="text-primary title starring">
+                                        Directors: <span class="text-body">
+                                            Anthony Russo, Joe Russo
+                                        </span>
+                                    </div>
+                                    <div class="text-primary title tag">
+                                        Actor: <span class="text-body">
+                                            Robert Downey Jr., Chris Evans, Mark Ruffalo,...
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex align-items-center r-mb-23" data-animation-in="fadeInUp" data-delay-in="0.5">
+                                    <a href="show-details.html" class="btn btn-danger iq-button">
+                                        <i class="fa-solid fa-play"></i>
+                                        Play Now
+                                    </a>
+                                    <a href="@item.uriMovieTrailer"
+                                       class="video-open btn btn-danger iq-button ml-3">
+                                        <i class="fa-solid fa-tv"></i>
+                                        Watch Trailer
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        
+    </div>
+    <!-- Slider End -->
+    <!-- MainContent -->
+    <div class="main-content">
+        <section class="list-movies">
+            <div class="container">
+                <h2 class="h2 section-title text-center">All Movies</h2>
+                <ul class="movies-list">
+                    @foreach (var item in Model)
+                    {
+                            <li>
+                                <div class="movie-card">
+                                    <a href="#">
+                                        <figure class="card-banner">
+                                            <img src="@item.uriImg" alt="Morbius movie poster">
+                                        </figure>
+                                    </a>
+
+                                    <div class="title-wrapper text-center">
+                                        <a href="#">
+                                            <h3 class="card-title">@item.nameMovie</h3>
+                                        </a>
+
+                                    </div>
+
+                                    <div class="card-meta d-flex justify-content-center">
+                                        <div class="badge-movie badge-outline">@item.qualityMovie</div>
+
+                                        <div class="badge-old badge-outline-old">@item.minAgeMovie +</div>
+
+                                        <div class="badge-time badge-outline-time">@item.timeMovie</div>
+                                    </div>
+
+                                </div>
+                            </li>
+                    }
+
+                </ul>
+
+            </div>
+        </section>
+        <section id="iq-favorites" class="pt-5">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-12 overflow-hidden">
+                        <div class="iq-main-header d-flex align-items-center justify-content-between">
+                            <h4 class="main-title">Top Movies</h4>
+                            <a class="iq-view-all" href="movie-category.html">View All</a>
+                        </div>
+                        <div class="favorites-contens">
+                            <ul class="favorites-slider list-inline row p-0 mb-0">
+                                @foreach(var item in Model)
+                                {
+                                    <li class="slide-item">
+                                        <div class="block-images position-relative">
+                                            <div class="img-box">
+                                                <img src="@item.uriImgCover" class="img-fluid" alt="">
+                                            </div>
+                                            <div class="block-description">
+                                                <h6 class="iq-title"><a href="movie-details.html">@item.nameMovie</a></h6>
+                                                <div class="movie-time d-flex align-items-center my-2">
+                                                    <div class="badge-hd badge-danger p-1 mr-2">@item.qualityMovie</div>
+                                                    <div class="badge badge-secondary p-1 mr-2">@item.minAgeMovie +</div>
+                                                    <span class="text-white">@item.timeMovie</span>
+                                                </div>
+                                                <div class="hover-buttons text-center">
+                                                    <span class="btn btn-danger iq-button">
+                                                        <i class="fa fa-play mr-1" aria-hidden="true"></i>
+                                                        Play Now
+                                                    </span>
+                                                    <a href="@item.uriMovieTrailer" class="video-open btn btn-danger iq-button ml-2">
+                                                        <i class="fa-solid fa-tv"></i>
+                                                        Trailer
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="iq-upcoming-movie">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-12 overflow-hidden">
+                        <div class="iq-main-header d-flex align-items-center justify-content-between">
+                            <h4 class="main-title">New Movies</h4>
+                            <a class="iq-view-all" href="movie-category.html">View All</a>
+                        </div>
+                        <div class="upcoming-contens">
+                            <ul class="favorites-slider list-inline row p-0 mb-0">
+                                @foreach (var item in Model)
+                                {
+                                    <li class="slide-item">
+                                        <div class="block-images position-relative">
+                                            <div class="img-box">
+                                                <img src="@item.uriImgCover" class="img-fluid" alt="">
+                                            </div>
+                                            <div class="block-description">
+                                                <h6 class="iq-title"><a href="movie-details.html">@item.nameMovie</a></h6>
+                                                <div class="movie-time d-flex align-items-center my-2">
+                                                    <div class="badge-hd badge-danger p-1 mr-2">@item.qualityMovie</div>
+                                                    <div class="badge badge-secondary p-1 mr-2">@item.minAgeMovie +</div>
+                                                    <span class="text-white">@item.timeMovie</span>
+                                                </div>
+                                                <div class="hover-buttons text-center">
+                                                    <span class="btn btn-danger iq-button">
+                                                        <i class="fa fa-play mr-1" aria-hidden="true"></i>
+                                                        Play Now
+                                                    </span>
+                                                    <a href="@item.uriMovieTrailer" class="video-open btn btn-danger iq-button ml-2">
+                                                        <i class="fa-solid fa-tv"></i>
+                                                        Trailer
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="iq-suggestede">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-12 overflow-hidden">
+                        <div class="iq-main-header d-flex align-items-center justify-content-between">
+                            <h4 class="main-title">Suggested For You</h4>
+                            <a class="iq-view-all" href="movie-category.html">View All</a>
+                        </div>
+                        <div class="suggestede-contens">
+                            <ul class="list-inline favorites-slider row p-0 mb-0">
+                                @foreach (var item in Model)
+                                {
+                                    <li class="slide-item">
+                                        <div class="block-images position-relative">
+                                            <div class="img-box">
+                                                <img src="@item.uriImgCover" class="img-fluid" alt="">
+                                            </div>
+                                            <div class="block-description">
+                                                <h6 class="iq-title"><a href="movie-details.html">@item.nameMovie</a></h6>
+                                                <div class="movie-time d-flex align-items-center my-2">
+                                                    <div class="badge-hd badge-danger p-1 mr-2">@item.qualityMovie</div>
+                                                    <div class="badge badge-secondary p-1 mr-2">@item.minAgeMovie +</div>
+                                                    <span class="text-white">@item.timeMovie</span>
+                                                </div>
+                                                <div class="hover-buttons text-center">
+                                                    <span class="btn btn-danger iq-button">
+                                                        <i class="fa fa-play mr-1" aria-hidden="true"></i>
+                                                        Play Now
+                                                    </span>
+                                                    <a href="@item.uriMovieTrailer" class="video-open btn btn-danger iq-button ml-2">
+                                                        <i class="fa-solid fa-tv"></i>
+                                                        Trailer
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="parallex" class="parallax-window">
+            <div class="container-fluid h-100">
+                <div class="row align-items-center justify-content-center h-100 parallaxt-details">
+                    <div class="col-lg-4 r-mb-23">
+                        <div class="text-left">
+                            <h1 class="slider-text big-title title text-uppercase">Free Guy</h1>
+                            <div class="movie-time d-flex align-items-center mb-3 mt-3">
+                                <div class="badge badge-danger p-2">4K</div>
+                                <div class="ml-3 badge badge-secondary p-2">13+</div>
+                                <span class="ml-3">105 min</span>
+                            </div>
+                            <p>
+                                A bank teller (Ryan Reynolds) discovers he is actually a background player in an open-world
+                                video game, and decides to become the hero of his own story. Now, in a world where there are
+                                no limits, he is determined to be the guy who saves his world his way before it’s too late.
+                            </p>
+                            <div class="parallax-buttons">
+                                <a href="show-details.html" class="btn btn-danger iq-button">
+                                    <i class="fa-solid fa-play"></i>
+                                    Play Now
+                                </a>
+                                <a href="https://www.youtube.com/watch?v=X2m-08cOAbc"
+                                   class="video-open btn btn-danger iq-button ml-3">
+                                    <i class="fa-solid fa-tv"></i>
+                                    Watch Trailer
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="parallax-img">
+                            <a href="movie-details.html">
+                                <img src="https://i.imgur.com/7Z8uqxN.jpg" class="img-fluid w-100" alt="bailey">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</section>
+
