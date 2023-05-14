@@ -23,6 +23,8 @@ builder.Services.ConfigureApplicationCookie(options => options.LoginPath = "/Use
 
 builder.Services.AddScoped<IMoviesRepository, MoviesRepository>();
 builder.Services.AddScoped<IUserAuthRepository, UserAuthRepository>();
+builder.Services.AddScoped<IGenreRepository, GenreRepository>();
+
 
 var app = builder.Build();
 

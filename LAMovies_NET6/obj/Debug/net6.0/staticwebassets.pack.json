@@ -365,6 +365,18 @@
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
     },
     {
+      "Id": "C:\\Users\\Admin\\source\\repos\\LAMovies_NET6\\LAMovies_NET6\\wwwroot\\movie\\1.mp4",
+      "PackagePath": "staticwebassets\\movie\\1.mp4"
+    },
+    {
+      "Id": "C:\\Users\\Admin\\source\\repos\\LAMovies_NET6\\LAMovies_NET6\\wwwroot\\movie\\video-ky-thuat-cua-c-ronaldo-clip-ky-thuat-cua-c-ronaldo-video-zing.mp4",
+      "PackagePath": "staticwebassets\\movie\\video-ky-thuat-cua-c-ronaldo-clip-ky-thuat-cua-c-ronaldo-video-zing.mp4"
+    },
+    {
+      "Id": "C:\\Users\\Admin\\source\\repos\\LAMovies_NET6\\LAMovies_NET6\\wwwroot\\movie\\y2meta.com-Marvel Studios' Avengers_ Infinity War Official Trailer-(1080p).mp4",
+      "PackagePath": "staticwebassets\\movie\\y2meta.com-Marvel Studios' Avengers_ Infinity War Official Trailer-(1080p).mp4"
+    },
+    {
       "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.LAMovies_NET6.Microsoft.AspNetCore.StaticWebAssets.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
     },

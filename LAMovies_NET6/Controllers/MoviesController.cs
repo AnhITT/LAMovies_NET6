@@ -2,33 +2,26 @@
 using LAMovies_NET6.Interfaces;
 using LAMovies_NET6.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Xml.Linq;
 
 namespace LAMovies_NET6.Controllers
 {
     public class MoviesController : Controller
     {
-        private readonly IMoviesRepository _moviesRepository;
+        private readonly IMoviesRepository _data;
         public MoviesController(IMoviesRepository moviesRepository)
         {
-            _moviesRepository = moviesRepository;
+            _data = moviesRepository;
         }
-        public IActionResult Index()
+        public IActionResult MovieDetail(int movieId)
         {
-            return View();
-        }
-        public async Task<IActionResult> ListProduct()
-        {
-            IEnumerable<Movie> movies = await _moviesRepository.GetAllMovies();
-            return PartialView("_ListProduct", movies);
-        }
-        public async Task<IActionResult> ProductDetail(int id)
-        {
-            Movie movie = await _moviesRepository.GetMovieById(id);
+            var movie = _data.GetDetailMovie(movieId);
             return View(movie);
         }
-        public IActionResult MovieDetail()
+        public IActionResult WatchMovie(int movieId)
         {
-            return View();
+            var movie = _data.WatchMovie(movieId);
+            return View(movie);
         }
     }
 }

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "GkoNqWtheRylF+j7dNbEzUKP6MDl5Dx9LAOK3QWmOEU=",
+  "Hash": "vMRYSXyDX6Aj/FTRCrxx4Ib6nguKZGT2VTu30t1aI2E=",
   "Source": "LAMovies_NET6",
   "BasePath": "_content/LAMovies_NET6",
   "Mode": "Default",
@@ -2582,6 +2582,57 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
+    },
+    {
+      "Identity": "C:\\Users\\Admin\\source\\repos\\LAMovies_NET6\\LAMovies_NET6\\wwwroot\\movie\\1.mp4",
+      "SourceId": "LAMovies_NET6",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Admin\\source\\repos\\LAMovies_NET6\\LAMovies_NET6\\wwwroot\\",
+      "BasePath": "_content/LAMovies_NET6",
+      "RelativePath": "movie/1.mp4",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\movie\\1.mp4"
+    },
+    {
+      "Identity": "C:\\Users\\Admin\\source\\repos\\LAMovies_NET6\\LAMovies_NET6\\wwwroot\\movie\\video-ky-thuat-cua-c-ronaldo-clip-ky-thuat-cua-c-ronaldo-video-zing.mp4",
+      "SourceId": "LAMovies_NET6",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Admin\\source\\repos\\LAMovies_NET6\\LAMovies_NET6\\wwwroot\\",
+      "BasePath": "_content/LAMovies_NET6",
+      "RelativePath": "movie/video-ky-thuat-cua-c-ronaldo-clip-ky-thuat-cua-c-ronaldo-video-zing.mp4",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\movie\\video-ky-thuat-cua-c-ronaldo-clip-ky-thuat-cua-c-ronaldo-video-zing.mp4"
+    },
+    {
+      "Identity": "C:\\Users\\Admin\\source\\repos\\LAMovies_NET6\\LAMovies_NET6\\wwwroot\\movie\\y2meta.com-Marvel Studios' Avengers_ Infinity War Official Trailer-(1080p).mp4",
+      "SourceId": "LAMovies_NET6",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Admin\\source\\repos\\LAMovies_NET6\\LAMovies_NET6\\wwwroot\\",
+      "BasePath": "_content/LAMovies_NET6",
+      "RelativePath": "movie/y2meta.com-Marvel Studios' Avengers_ Infinity War Official Trailer-(1080p).mp4",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\movie\\y2meta.com-Marvel Studios' Avengers_ Infinity War Official Trailer-(1080p).mp4"
     }
   ]
 }

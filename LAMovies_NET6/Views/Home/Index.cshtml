@@ -1,4 +1,5 @@
-﻿@model IEnumerable<LAMovies_NET6.Models.Movie>
+﻿@model LAMovies_NET6.Models.DTO.MovieListDTO
+
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -8,7 +9,7 @@
 <section id="home" class="iq-main-slider p-0">
     <!-- Slider -->
     <div id="home-slider" class="slider m-0 p-0">
-        @foreach(var item in Model)
+        @foreach(var item in Model.MovieList)
         {
             <div style="background-image: url(@item.uriImgCover);" class="slide slick-bg s-bg-1">
                 <div class="container-fluid position-relative h-100">
@@ -31,7 +32,14 @@
                                 </p>
                                 <div class="trending-list">
                                     <div class="text-primary title genres">
-                                        Genres: <span class="text-body">Action</span>
+                                        Genres: <span class="text-body">
+                                            @foreach (var genre in item.GenreNames)
+                                            {
+                                                <a href="#">
+                                                    @genre
+                                                </a>
+                                            }
+                                        </span>
                                     </div>
                                     <div class="text-primary title starring">
                                         Directors: <span class="text-body">
@@ -71,10 +79,10 @@
             <div class="container">
                 <h2 class="h2 section-title text-center">All Movies</h2>
                 <ul class="movies-list">
-                    @foreach (var item in Model)
+                    @foreach (var item in Model.MovieList)
                     {
                             <li>
-                                <div class="movie-card">
+                            <div class="movie-card" onclick="window.location.href='/Movies/MovieDetail?movieId=@item.idMovie'">
                                     <a href="#">
                                         <figure class="card-banner">
                                             <img src="@item.uriImg" alt="Morbius movie poster">
@@ -99,8 +107,22 @@
                                 </div>
                             </li>
                     }
-
                 </ul>
+            </div>
+
+            <div class="d-flex justify-content-center pt-2">
+                @for (int i = 1; i <= Model.totalPages; i++)
+                {
+                    if (i == Model.currentPage)
+                    {
+                        <a href="/Home/Index?currentPage=@i&term=@Model.term" class="active btn btn-outline-danger m-2">@i</a>
+                    }
+                    else
+                    {
+                        <a href="/Home/Index?currentPage=@i&term=@Model.term" class="btn btn-outline-danger m-2">@i</a>
+
+                    }
+                }
 
             </div>
         </section>
@@ -114,7 +136,7 @@
                         </div>
                         <div class="favorites-contens">
                             <ul class="favorites-slider list-inline row p-0 mb-0">
-                                @foreach(var item in Model)
+                                @foreach(var item in Model.MovieList)
                                 {
                                     <li class="slide-item">
                                         <div class="block-images position-relative">
@@ -158,7 +180,7 @@
                         </div>
                         <div class="upcoming-contens">
                             <ul class="favorites-slider list-inline row p-0 mb-0">
-                                @foreach (var item in Model)
+                                @foreach (var item in Model.MovieList)
                                 {
                                     <li class="slide-item">
                                         <div class="block-images position-relative">
@@ -202,7 +224,7 @@
                         </div>
                         <div class="suggestede-contens">
                             <ul class="list-inline favorites-slider row p-0 mb-0">
-                                @foreach (var item in Model)
+                                @foreach (var item in Model.MovieList)
                                 {
                                     <li class="slide-item">
                                         <div class="block-images position-relative">

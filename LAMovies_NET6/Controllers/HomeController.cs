@@ -8,28 +8,17 @@ namespace LAMovies_NET6.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-        private readonly ApplicationDbContext _context;
-        public HomeController(ApplicationDbContext context, ILogger<HomeController> logger)
+        private readonly IMoviesRepository _data;
+        public HomeController(IMoviesRepository moviesRepository)
         {
-            _context = context;
-            _logger = logger;
+            _data = moviesRepository;
 
         }
-
-
-
-        public IActionResult Index()
+        public IActionResult Index(string term = "", int currentPage = 1)
         {
-            var movies = _context.Movies.ToList();
+            var movies = _data.List(term, true, currentPage);
             return View(movies);
         }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
         
     }
 }
