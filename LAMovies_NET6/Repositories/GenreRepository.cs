@@ -1,13 +1,17 @@
 ﻿using LAMovies_NET6.Data;
 using LAMovies_NET6.Interfaces;
 using LAMovies_NET6.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace LAMovies_NET6.Repositories
 {
     public class GenreRepository : IGenreRepository
     {
         private readonly ApplicationDbContext _data;
-        public GenreRepository(ApplicationDbContext data) {  _data = data; }
+        public GenreRepository(ApplicationDbContext data) 
+        {
+            _data = data; 
+        }
         public bool Add(Genre model)
         {
             try
@@ -44,11 +48,6 @@ namespace LAMovies_NET6.Repositories
             return _data.Genres.Find(id);
         }
 
-        public IQueryable<Genre> List()
-        {
-            var data = _data.Genres.AsQueryable();
-            return data;
-        }
 
         public bool Update(Genre model)
         {
@@ -62,6 +61,14 @@ namespace LAMovies_NET6.Repositories
             {
                 return false;
             }
+        }
+        public List<Genre> GetGenresList()
+        {
+            return _data.Genres.ToList();
+        }
+        public ICollection<Movie> GetMoviesByGenres(int idGenres)
+        {
+            return _data.MovieGenres.Where(g => g.idGenre == idGenres).Select(m => m.Movie).ToList();
         }
     }
 }

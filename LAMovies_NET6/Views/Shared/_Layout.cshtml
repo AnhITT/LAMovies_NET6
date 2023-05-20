@@ -6,7 +6,7 @@
     <title>@ViewData["Title"]</title>
     <link rel="icon" href="~/faviconicon.ico" />
     <link href="..\css\site.css" rel="stylesheet" />
-    <link rel="stylesheet" href="..\css/bootstrap.min.css" />
+    <link href="~/css/bootstrap.min.css" rel="stylesheet" />
     <link href="..\css\typography.css" rel="stylesheet" />
     <link href="..\css\responsive.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -37,47 +37,46 @@
                                             <a asp-controller="Home" asp-action="Index">Home</a>
                                         </li>
                                         <li class="menu-item">
-                                            <a href="#">movies</a>
+                                            <a asp-controller="Movies" asp-action="ListMovies">movies</a>
                                             <ul class="sub-menu">
                                                 <li class="menu-item"><a href="#">series movies</a></li>
                                                 <li class="menu-item "><a href="#">odd movie</a></li>
-                                                
                                             </ul>
                                         </li>
                                         <li class="menu-item">
-                                            <a href="movie-category.html">movies genreS</a>
+                                            <a asp-controller="Movies" asp-action="ListMovies">movies genreS</a>
                                             <ul class="sub-menu">
                                                 <li class="menu-item">
-                                                    <a href="#">
+                                                    <a href="#" onclick="window.location.href='/Genre/ListMovieByGenres?id=1'">
                                                         Action
                                                     </a>
                                                 </li>
-                                                <li class="menu-item ">
+                                                <li class="menu-item" onclick="window.location.href='/Genre/ListMovieByGenres?id=2'">
                                                     <a href="#">
                                                         Humorous
                                                     </a>
                                                 </li>
-                                                <li class="menu-item ">
+                                                <li class="menu-item " onclick="window.location.href='/Genre/ListMovieByGenres?id=3'">
                                                     <a href="#">
                                                         Horrified
                                                     </a>
                                                 </li>
-                                                <li class="menu-item ">
+                                                <li class="menu-item " onclick="window.location.href='/Genre/ListMovieByGenres?id=4'">
                                                     <a href="#">
                                                         War
                                                     </a>
                                                 </li>
-                                                <li class="menu-item ">
+                                                <li class="menu-item " onclick="window.location.href='/Genre/ListMovieByGenres?id=5'">
                                                     <a href="#">
                                                         Mentality
                                                     </a>
                                                 </li>
-                                                <li class="menu-item ">
+                                                <li class="menu-item " onclick="window.location.href='/Genre/ListMovieByGenres?id=6'">
                                                     <a href="#">
                                                         Cartoon
                                                     </a>
                                                 </li>
-                                                <li class="menu-item ">
+                                                <li class="menu-item " onclick="window.location.href='/Genre/ListMovieByGenres?id=7'">
                                                     <a href="#">
                                                         Fiction
                                                     </a>
@@ -124,7 +123,9 @@
                                                 </li>
                                             </ul>
                                         </li>
-
+                                        <li class="menu-item">
+                                            <a asp-controller="Pricing" asp-action="Pricing">Pricing</a>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>

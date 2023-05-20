@@ -43,9 +43,8 @@
             <p class="storyline">
                 @Model.descriptionMovie
             </p>
-
-            <div class="d-flex align-items-center r-mb-23" data-animation-in="fadeInUp" data-delay-in="0.5">
-                <a onclick="window.location.href='/Movies/WatchMovie?movieId=@Model.idMovie'" class="btn btn-danger iq-button">
+            <div class="d-flex align-items-center r-mb-23">
+                <a href="/Movies/WatchMovie?movieId=@Model.idMovie" class="btn btn-danger iq-button">
                     <i class="fa-solid fa-play"></i>
                     Play Now
                 </a>

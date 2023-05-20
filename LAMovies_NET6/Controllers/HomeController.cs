@@ -8,17 +8,21 @@ namespace LAMovies_NET6.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IMoviesRepository _data;
+        private readonly IMoviesRepository _movie;
         public HomeController(IMoviesRepository moviesRepository)
         {
-            _data = moviesRepository;
+            _movie = moviesRepository;
 
         }
         public IActionResult Index(string term = "", int currentPage = 1)
         {
-            var movies = _data.List(term, true, currentPage);
+            var movies = _movie.List(term, true, currentPage);
             return View(movies);
         }
-        
+        public IActionResult _PartialNewMovies()
+        {
+            var movie = _movie.ListMoviesUpdate();
+            return PartialView(movie);
+        }
     }
 }

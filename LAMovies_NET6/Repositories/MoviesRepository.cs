@@ -59,6 +59,33 @@ namespace LAMovies_NET6.Repositories
                 return false;
             }
         }
+        public bool Update(Movie model)
+        {
+            try
+            {
+                var genresToDeleted = _data.MovieGenres.Where(a => a.idMovie == model.idMovie && !model.Genres.Contains(a.idGenre)).ToList();
+                foreach (var mGenre in genresToDeleted)
+                {
+                    _data.MovieGenres.Remove(mGenre);
+                }
+                foreach (int genId in model.Genres)
+                {
+                    var movieGenre = _data.MovieGenres.FirstOrDefault(a => a.idMovie == model.idMovie && a.idGenre == genId);
+                    if (movieGenre == null)
+                    {
+                        movieGenre = new MovieGenre { idGenre = genId, idMovie = model.idMovie };
+                        _data.MovieGenres.Add(movieGenre);
+                    }
+                }
+                _data.Movies.Update(model);
+                _data.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
         public void DeleteMovieGenre(Movie model)
         {
             var movieGenres = _data.MovieGenres.Where(a => a.idMovie == model.idMovie);
@@ -143,32 +170,22 @@ namespace LAMovies_NET6.Repositories
             DisplayGenresToMovie(list);
             return movie;
         }
-        public bool Update(Movie model)
+
+        public void UpdateView(Movie movie)
         {
-            try 
-            { 
-            var genresToDeleted = _data.MovieGenres.Where(a => a.idMovie == model.idMovie && !model.Genres.Contains(a.idGenre)).ToList();
-            foreach (var mGenre in genresToDeleted)
-            {
-                _data.MovieGenres.Remove(mGenre);
-            }
-            foreach (int genId in model.Genres)
-            {
-                var movieGenre = _data.MovieGenres.FirstOrDefault(a => a.idMovie == model.idMovie && a.idGenre == genId);
-                if (movieGenre == null)
-                {
-                    movieGenre = new MovieGenre { idGenre = genId, idMovie = model.idMovie };
-                    _data.MovieGenres.Add(movieGenre);
-                }
-            }
-            _data.Movies.Update(model);
+            _data.Movies.Attach(movie);
+            movie.viewMovie = movie.viewMovie + 1;
+            _data.Entry(movie).Property(x => x.viewMovie).IsModified = true;
             _data.SaveChanges();
-            return true;
-            }
-            catch (Exception ex)
-            {
-                return false;
-            }
+        }
+
+        public MovieListDTO ListMoviesUpdate()
+        {
+            var movieDTO = new MovieListDTO();
+            var list = _data.Movies.ToList();
+            var newestMovies = list.OrderByDescending(p => p.yearCreateMovie).Take(3).ToList();
+            movieDTO.MovieList = list.AsQueryable();
+            return movieDTO;
         }
     }
 }

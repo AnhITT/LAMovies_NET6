@@ -6,5 +6,7 @@ namespace LAMovies_NET6.Models
     {
         public string fullName { set; get; }
         public DateTime dateBirthdayUser { get; set; }
+        public ICollection<UserPricing> UserPricing { get; set; }
+
     }
 }

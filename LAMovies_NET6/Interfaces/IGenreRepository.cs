@@ -8,6 +8,7 @@ namespace LAMovies_NET6.Interfaces
         bool Update(Genre model);
         Genre GetById(int id);
         bool Delete(int id);
-        IQueryable<Genre> List();
+        List<Genre> GetGenresList();
+        ICollection<Movie> GetMoviesByGenres(int idGenres);
     }
 }

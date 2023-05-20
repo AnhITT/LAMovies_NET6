@@ -115,6 +115,29 @@ namespace LAMovies_NET6.Migrations
                     b.ToTable("MovieGenres");
                 });
 
+            modelBuilder.Entity("LAMovies_NET6.Models.Pricing", b =>
+                {
+                    b.Property<int>("idPricing")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("idPricing"));
+
+                    b.Property<string>("namePricing")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("pricePricing")
+                        .HasColumnType("float");
+
+                    b.Property<int>("timePricing")
+                        .HasColumnType("int");
+
+                    b.HasKey("idPricing");
+
+                    b.ToTable("Pricings");
+                });
+
             modelBuilder.Entity("LAMovies_NET6.Models.User", b =>
                 {
                     b.Property<string>("Id")
@@ -172,6 +195,27 @@ namespace LAMovies_NET6.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("LAMovies_NET6.Models.UserPricing", b =>
+                {
+                    b.Property<string>("idUser")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("idPricing")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("endTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("startTime")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("idUser", "idPricing");
+
+                    b.HasIndex("idPricing");
+
+                    b.ToTable("UserPricings");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -307,6 +351,25 @@ namespace LAMovies_NET6.Migrations
                     b.Navigation("Movie");
                 });
 
+            modelBuilder.Entity("LAMovies_NET6.Models.UserPricing", b =>
+                {
+                    b.HasOne("LAMovies_NET6.Models.Pricing", "Pricing")
+                        .WithMany("UserPricing")
+                        .HasForeignKey("idPricing")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("LAMovies_NET6.Models.User", "User")
+                        .WithMany("UserPricing")
+                        .HasForeignKey("idUser")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Pricing");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("LAMovies_NET6.Models.Genre", b =>
                 {
                     b.Navigation("MovieGenre");
@@ -315,6 +378,16 @@ namespace LAMovies_NET6.Migrations
             modelBuilder.Entity("LAMovies_NET6.Models.Movie", b =>
                 {
                     b.Navigation("MovieGenre");
+                });
+
+            modelBuilder.Entity("LAMovies_NET6.Models.Pricing", b =>
+                {
+                    b.Navigation("UserPricing");
+                });
+
+            modelBuilder.Entity("LAMovies_NET6.Models.User", b =>
+                {
+                    b.Navigation("UserPricing");
                 });
 #pragma warning restore 612, 618
         }

@@ -14,6 +14,8 @@ namespace LAMovies_NET6.Interfaces
         List<int> GetGenreByMovieId(int movieId);
         Movie GetDetailMovie(int idMovie);
         Movie WatchMovie(int idMovie);
+        void UpdateView(Movie movie);
+        MovieListDTO ListMoviesUpdate();
 
     }
 }
