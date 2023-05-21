@@ -5,6 +5,7 @@ using LAMovies_NET6.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using LAMovies_NET6.Interfaces;
 using LAMovies_NET6.Repositories;
+using Microsoft.AspNetCore.Hosting;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,6 +28,7 @@ builder.Services.AddScoped<IGenreRepository, GenreRepository>();
 builder.Services.AddScoped<IPricingRepository, PricingRepository>();
 builder.Services.AddScoped<IPaymentRepository, PaymentRepository>();
 
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 var app = builder.Build();
 

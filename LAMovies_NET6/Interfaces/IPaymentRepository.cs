@@ -4,6 +4,6 @@ namespace LAMovies_NET6.Interfaces
 {
     public interface IPaymentRepository
     {
-        UserPricing Payment(int id);
+        void SaveDataService(int id);
     }
 }

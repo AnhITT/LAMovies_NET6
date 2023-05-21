@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Http;
-using LAMovies_NET6.Data;
+﻿using LAMovies_NET6.Data;
 using LAMovies_NET6.Interfaces;
 using LAMovies_NET6.Models;
 using System.Security.Claims;
@@ -11,13 +9,13 @@ namespace LAMovies_NET6.Repositories
     {
         private readonly ApplicationDbContext _data;
         private readonly IHttpContextAccessor _httpContextAccessor;
-
+        
         public PaymentRepository(ApplicationDbContext context, IHttpContextAccessor httpContextAccessor)
         {
             _data = context;
             _httpContextAccessor = httpContextAccessor;
         }
-        public UserPricing Payment(int id)
+        public void SaveDataService(int id)
         {
             var user = _httpContextAccessor.HttpContext.User;
             var userId = user.FindFirst(ClaimTypes.NameIdentifier)?.Value;
@@ -31,7 +29,6 @@ namespace LAMovies_NET6.Repositories
             };
             _data.Add(userPricing);
             _data.SaveChanges();
-            return userPricing;
         }
         
     }

@@ -9,20 +9,21 @@ namespace LAMovies_NET6.Controllers
     public class HomeController : Controller
     {
         private readonly IMoviesRepository _movie;
-        public HomeController(IMoviesRepository moviesRepository)
+        private readonly IPricingRepository _pricing;
+        public HomeController(IMoviesRepository moviesRepository, IPricingRepository pricing)
         {
             _movie = moviesRepository;
-
+            _pricing = pricing;
         }
         public IActionResult Index(string term = "", int currentPage = 1)
         {
             var movies = _movie.List(term, true, currentPage);
+            ViewBag.listUpdate = _movie.ListMoviesUpdate();
+            ViewBag.topViewMovie = _movie.GetTop5MovieView();
+            ViewBag.sortMovie = _movie.SortDate();
+            ViewBag.top1 = _movie.Top1Movie();
+            _pricing.CheckEndTime();
             return View(movies);
-        }
-        public IActionResult _PartialNewMovies()
-        {
-            var movie = _movie.ListMoviesUpdate();
-            return PartialView(movie);
         }
     }
 }

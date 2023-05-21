@@ -1,0 +1,113 @@
+﻿
+@{
+    var userName = "";
+    var email = "";
+    var fullName = "";
+    DateTime? birthDay = null;
+    var user = ViewBag.User;
+    if (user != null)
+    {
+        userName = user.UserName;
+        email = user.Email;
+        fullName = user.fullName;
+        birthDay = user.dateBirthdayUser;
+    }
+
+    int id = 0;
+    var name = "";
+    double? price = null;
+    int time = 0;
+    var pricing = ViewBag.InfoPricing;
+    DateTime? dateStart = null;
+    DateTime? dateEnd = null;
+    if (pricing != null)
+    {
+        id = pricing.idPricing;
+        name = pricing.namePricing;
+        price = pricing.pricePricing;
+        time = pricing.timePricing;
+        dateStart = DateTime.Now;
+        dateEnd = DateTime.Now.AddMonths(time);
+    }
+}
+@{
+    ViewData["Title"] = "Check Out";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<section id="home" class="iq-main-slider pt-5">
+            <div class="container pt-5">
+                <div class="">
+                    <h2 class="text-center pt-3"><span class="far fa-check-square pe-2 "></span><b> LA Movies </b> | Payment</h2>
+                    <div class="card-body row text-white">
+                        <div class="col-lg-6" style="padding-left: 30px">
+                                <p>
+                                    User Name
+                                    <input class="form-control" value="@userName" />
+                                </p>
+                                <p>
+                                    Full Name
+                                    <input class="form-control" value="@fullName" />
+                                </p>
+                                <p>
+                                    Email
+                                    <input class="form-control" value="@email" />
+                                </p>
+                                <p>
+                                    Date BirthDay
+                                    <input class="form-control" value="@birthDay" />
+                                </p>
+                                <div class="rounded d-flex">
+                                </div>
+                                <hr />
+                                <div class="pt-2">
+                                <a onclick="window.location.href='/Payment/PaypalCheckout?idPricing=@id'" class="text-center btn btn-outline-dark flex-row pb-3 rounded border w-100 p-3 text-white">
+                                        <p class="mb-0 h5">
+                                            <i class="fa-brands fa-paypal"></i> Payment with Paypal
+                                        </p>
+                                    </a>
+                                </div>
+
+                        </div>
+                        <div class="col-lg-6">
+                         <div class="rounded d-flex flex-column p-2">
+                                <div class="p-2 me-3 text-center">
+                                    <h3>Infomation Pricing</h3>
+                                </div>
+                                <div class="p-2 d-flex">
+                                    <div class="col-6 mt-4">Name</div>
+                                    <div class="col-6 mt-4">@name</div>
+                                </div>
+                                <div class="p-2 d-flex">
+                                <div class="col-6 mt-1">Price</div>
+                                <div class="col-6 mt-1">@price $</div>
+                                    </div>
+                                    <div class="p-2 d-flex">
+                                <div class="col-6 mt-1">Time</div>
+                                <div class="col-6 mt-1">@time month</div>
+                                    </div>
+                                    <div class="p-2 d-flex">
+                                <div class="col-6 mt-1">Date Start</div>
+                                <div class="col-6 mt-1">@dateStart</div>
+                                    </div>
+                                    <div class="p-2 d-flex">
+                                <div class="col-6 mt-1">Date End</div>
+                                <div class="col-6 mt-1">@dateEnd</div>
+                                </div>
+                                <div class="border-top px-2 mx-2 mt-2"></div>
+                                <div class="p-2 d-flex pt-3">
+                                    <div class="col-8"><b>Total</b></div>
+                                    <div class="ms-auto"><b class="text-success">@price $</b></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </section>
+
+<style>
+    a {
+        text-decoration: none !important;
+    }
+</style>
+

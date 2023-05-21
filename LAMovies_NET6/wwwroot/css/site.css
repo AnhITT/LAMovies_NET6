@@ -1708,7 +1708,7 @@ li.slide-item .block-description .parallax-ratting span {
     height: 100%;
     padding: 150px 0;
     position: relative;
-    background: url(https://i.imgur.com/hkGEVsK.jpg)center center;
+    background: url('../image/login/1.png')center center;
     background-size: cover;
     background-attachment: fixed;
 }
@@ -3561,6 +3561,7 @@ Breadcrumb style 1 2 and 3 4 5
 }
 
 .iq-breadcrumb-one {
+    background-image: url(/image/background/01.jpg);
     display: block;
     padding: 150px 0 80px;
     z-index: 9;
@@ -5012,7 +5013,7 @@ li {
 \*-----------------------------------*/
 
 .movie-detail {
-    background-color: rgb(36 38 43 / 10%);
+    background: url(/image/Background/service-bg.jpg);
     background-size: cover;
     background-position: center;
     padding-top: 160px;

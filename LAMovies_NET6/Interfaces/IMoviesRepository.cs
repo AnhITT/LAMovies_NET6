@@ -15,7 +15,10 @@ namespace LAMovies_NET6.Interfaces
         Movie GetDetailMovie(int idMovie);
         Movie WatchMovie(int idMovie);
         void UpdateView(Movie movie);
-        MovieListDTO ListMoviesUpdate();
+        List<Movie> ListMoviesUpdate();
+        List<Movie> GetTop5MovieView();
+        List<Movie> SortDate();
+        Movie Top1Movie();
 
     }
 }

@@ -6,8 +6,11 @@ C:\Users\Admin\source\repos\LAMovies_NET6\LAMovies_NET6\bin\Debug\net6.0\LAMovie
 C:\Users\Admin\source\repos\LAMovies_NET6\LAMovies_NET6\bin\Debug\net6.0\LAMovies_NET6.runtimeconfig.json
 C:\Users\Admin\source\repos\LAMovies_NET6\LAMovies_NET6\bin\Debug\net6.0\LAMovies_NET6.dll
 C:\Users\Admin\source\repos\LAMovies_NET6\LAMovies_NET6\bin\Debug\net6.0\LAMovies_NET6.pdb
+C:\Users\Admin\source\repos\LAMovies_NET6\LAMovies_NET6\bin\Debug\net6.0\AutoMapper.dll
+C:\Users\Admin\source\repos\LAMovies_NET6\LAMovies_NET6\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
 C:\Users\Admin\source\repos\LAMovies_NET6\LAMovies_NET6\bin\Debug\net6.0\Azure.Core.dll
 C:\Users\Admin\source\repos\LAMovies_NET6\LAMovies_NET6\bin\Debug\net6.0\Azure.Identity.dll
+C:\Users\Admin\source\repos\LAMovies_NET6\LAMovies_NET6\bin\Debug\net6.0\BraintreeHttp-Dotnet.dll
 C:\Users\Admin\source\repos\LAMovies_NET6\LAMovies_NET6\bin\Debug\net6.0\Humanizer.dll
 C:\Users\Admin\source\repos\LAMovies_NET6\LAMovies_NET6\bin\Debug\net6.0\MessagePack.dll
 C:\Users\Admin\source\repos\LAMovies_NET6\LAMovies_NET6\bin\Debug\net6.0\MessagePack.Annotations.dll
@@ -84,6 +87,7 @@ C:\Users\Admin\source\repos\LAMovies_NET6\LAMovies_NET6\bin\Debug\net6.0\NuGet.P
 C:\Users\Admin\source\repos\LAMovies_NET6\LAMovies_NET6\bin\Debug\net6.0\NuGet.ProjectModel.dll
 C:\Users\Admin\source\repos\LAMovies_NET6\LAMovies_NET6\bin\Debug\net6.0\NuGet.Protocol.dll
 C:\Users\Admin\source\repos\LAMovies_NET6\LAMovies_NET6\bin\Debug\net6.0\NuGet.Versioning.dll
+C:\Users\Admin\source\repos\LAMovies_NET6\LAMovies_NET6\bin\Debug\net6.0\Source.dll
 C:\Users\Admin\source\repos\LAMovies_NET6\LAMovies_NET6\bin\Debug\net6.0\System.CodeDom.dll
 C:\Users\Admin\source\repos\LAMovies_NET6\LAMovies_NET6\bin\Debug\net6.0\System.Composition.AttributedModel.dll
 C:\Users\Admin\source\repos\LAMovies_NET6\LAMovies_NET6\bin\Debug\net6.0\System.Composition.Convention.dll

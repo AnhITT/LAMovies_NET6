@@ -11,14 +11,16 @@ namespace LAMovies_NET6.Repositories
         private readonly UserManager<User> userManager;
         private readonly RoleManager<IdentityRole> roleManager;
         private readonly SignInManager<User> signInManager;
+        private readonly IHttpContextAccessor _httpContextAccessor;
+
 
         public UserAuthRepository(UserManager<User> userManager,
-            SignInManager<User> signInManager, RoleManager<IdentityRole> roleManager)
+            SignInManager<User> signInManager, RoleManager<IdentityRole> roleManager, IHttpContextAccessor httpContextAccessor)
         {
             this.userManager = userManager;
             this.roleManager = roleManager;
             this.signInManager = signInManager;
-
+            _httpContextAccessor = httpContextAccessor;
         }
 
         public async Task<Respone> RegisterAsync(RegistrationDTO model)
@@ -116,7 +118,24 @@ namespace LAMovies_NET6.Repositories
         {
             await signInManager.SignOutAsync();
         }
+        public async Task<User> GetInfoAccount()
+        {
+            var httpContext = _httpContextAccessor.HttpContext;
+            if (httpContext.User.Identity.IsAuthenticated)
+            {
+                var userManager = httpContext.RequestServices.GetRequiredService<UserManager<User>>();
+                var user = await userManager.GetUserAsync(httpContext.User);
 
-        
+                if (user != null)
+                {
+                    var email = user.Email;
+
+                    return user;
+                }
+            }
+            return null; 
+        }
+
+
     }
 }

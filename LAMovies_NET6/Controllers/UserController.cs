@@ -63,5 +63,10 @@ namespace LAMovies_NET6.Controllers
             await this._userAuthRepository.LogoutAsync();
             return RedirectToAction(nameof(Login));
         }
+
+        public IActionResult ErrorLogin()
+        {
+            return View();
+        }
     }
 }

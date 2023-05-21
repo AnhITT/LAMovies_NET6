@@ -179,13 +179,29 @@ namespace LAMovies_NET6.Repositories
             _data.SaveChanges();
         }
 
-        public MovieListDTO ListMoviesUpdate()
+        public List<Movie> ListMoviesUpdate()
         {
-            var movieDTO = new MovieListDTO();
-            var list = _data.Movies.ToList();
-            var newestMovies = list.OrderByDescending(p => p.yearCreateMovie).Take(3).ToList();
-            movieDTO.MovieList = list.AsQueryable();
-            return movieDTO;
+            var newestMovies = _data.Movies.OrderByDescending(p => p.yearCreateMovie).Take(3).ToList();
+            DisplayGenresToMovie(newestMovies);
+            return newestMovies;
+        }
+
+        public List<Movie> GetTop5MovieView()
+        {
+            var topMovies = _data.Movies.OrderByDescending(p => p.viewMovie).Take(5).ToList();
+            return topMovies;
+        }
+
+        public List<Movie> SortDate()
+        {
+            var sortedMovies = _data.Movies.OrderByDescending(p => p.yearCreateMovie).ToList();
+            return sortedMovies;
+        }
+
+        public Movie Top1Movie()
+        {
+            var topMovie = _data.Movies.OrderByDescending(p => p.viewMovie).FirstOrDefault();
+            return topMovie;
         }
     }
 }

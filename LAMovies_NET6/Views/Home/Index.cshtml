@@ -1,7 +1,7 @@
 ﻿@model LAMovies_NET6.Models.DTO.MovieListDTO
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Home";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -67,39 +67,12 @@
                 <div class="row">
                     <div class="col-sm-12 overflow-hidden">
                         <div class="iq-main-header d-flex align-items-center justify-content-between">
-                            <h4 class="main-title">Top Movies</h4>
+                            <h4 class="main-title">Top 5 Movies</h4>
                             <a class="iq-view-all" href="movie-category.html">View All</a>
                         </div>
                         <div class="favorites-contens">
                             <ul class="favorites-slider list-inline row p-0 mb-0">
-                                @foreach(var item in Model.MovieList)
-                                {
-                                    <li class="slide-item">
-                                        <div class="block-images position-relative">
-                                            <div class="img-box">
-                                                <img src="@item.uriImgCover" class="img-fluid" alt="">
-                                            </div>
-                                            <div class="block-description">
-                                                <h6 class="iq-title"><a href="movie-details.html">@item.nameMovie</a></h6>
-                                                <div class="movie-time d-flex align-items-center my-2">
-                                                    <div class="badge-hd badge-danger p-1 mr-2">@item.qualityMovie</div>
-                                                    <div class="badge badge-secondary p-1 mr-2">@item.minAgeMovie +</div>
-                                                    <span class="text-white">@item.timeMovie</span>
-                                                </div>
-                                                <div class="hover-buttons text-center">
-                                                    <span class="btn btn-danger iq-button">
-                                                        <i class="fa fa-play mr-1" aria-hidden="true"></i>
-                                                        Play Now
-                                                    </span>
-                                                    <a href="@item.uriMovieTrailer" class="video-open btn btn-danger iq-button ml-2">
-                                                        <i class="fa-solid fa-tv"></i>
-                                                        Trailer
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                }
+                                @Html.Partial("_PartialTop5MovieView")
                             </ul>
                         </div>
                     </div>
@@ -116,34 +89,7 @@
                         </div>
                         <div class="upcoming-contens">
                             <ul class="favorites-slider list-inline row p-0 mb-0">
-                                @foreach (var item in Model.MovieList)
-                                {
-                                    <li class="slide-item">
-                                        <div class="block-images position-relative">
-                                            <div class="img-box">
-                                                <img src="@item.uriImgCover" class="img-fluid" alt="">
-                                            </div>
-                                            <div class="block-description">
-                                                <h6 class="iq-title"><a href="movie-details.html">@item.nameMovie</a></h6>
-                                                <div class="movie-time d-flex align-items-center my-2">
-                                                    <div class="badge-hd badge-danger p-1 mr-2">@item.qualityMovie</div>
-                                                    <div class="badge badge-secondary p-1 mr-2">@item.minAgeMovie +</div>
-                                                    <span class="text-white">@item.timeMovie</span>
-                                                </div>
-                                                <div class="hover-buttons text-center">
-                                                    <span class="btn btn-danger iq-button">
-                                                        <i class="fa fa-play mr-1" aria-hidden="true"></i>
-                                                        Play Now
-                                                    </span>
-                                                    <a href="@item.uriMovieTrailer" class="video-open btn btn-danger iq-button ml-2">
-                                                        <i class="fa-solid fa-tv"></i>
-                                                        Trailer
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                }
+                                @Html.Partial("_PartialSortDate")
                             </ul>
                         </div>
                     </div>
@@ -160,79 +106,15 @@
                         </div>
                         <div class="suggestede-contens">
                             <ul class="list-inline favorites-slider row p-0 mb-0">
-                                @foreach (var item in Model.MovieList)
-                                {
-                                    <li class="slide-item">
-                                        <div class="block-images position-relative">
-                                            <div class="img-box">
-                                                <img src="@item.uriImgCover" class="img-fluid" alt="">
-                                            </div>
-                                            <div class="block-description">
-                                                <h6 class="iq-title"><a href="movie-details.html">@item.nameMovie</a></h6>
-                                                <div class="movie-time d-flex align-items-center my-2">
-                                                    <div class="badge-hd badge-danger p-1 mr-2">@item.qualityMovie</div>
-                                                    <div class="badge badge-secondary p-1 mr-2">@item.minAgeMovie +</div>
-                                                    <span class="text-white">@item.timeMovie</span>
-                                                </div>
-                                                <div class="hover-buttons text-center">
-                                                    <span class="btn btn-danger iq-button">
-                                                        <i class="fa fa-play mr-1" aria-hidden="true"></i>
-                                                        Play Now
-                                                    </span>
-                                                    <a href="@item.uriMovieTrailer" class="video-open btn btn-danger iq-button ml-2">
-                                                        <i class="fa-solid fa-tv"></i>
-                                                        Trailer
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                }
+                                @Html.Partial("_PartialSortDate")
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-        <section id="parallex" class="parallax-window">
-            <div class="container-fluid h-100">
-                <div class="row align-items-center justify-content-center h-100 parallaxt-details">
-                    <div class="col-lg-4 r-mb-23">
-                        <div class="text-left">
-                            <h1 class="slider-text big-title title text-uppercase">Free Guy</h1>
-                            <div class="movie-time d-flex align-items-center mb-3 mt-3">
-                                <div class="badge badge-danger p-2">4K</div>
-                                <div class="ml-3 badge badge-secondary p-2">13+</div>
-                                <span class="ml-3">105 min</span>
-                            </div>
-                            <p>
-                                A bank teller (Ryan Reynolds) discovers he is actually a background player in an open-world
-                                video game, and decides to become the hero of his own story. Now, in a world where there are
-                                no limits, he is determined to be the guy who saves his world his way before it’s too late.
-                            </p>
-                            <div class="parallax-buttons">
-                                <a href="show-details.html" class="btn btn-danger iq-button">
-                                    <i class="fa-solid fa-play"></i>
-                                    Play Now
-                                </a>
-                                <a href="https://www.youtube.com/watch?v=X2m-08cOAbc"
-                                   class="video-open btn btn-danger iq-button ml-3">
-                                    <i class="fa-solid fa-tv"></i>
-                                    Watch Trailer
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-8">
-                        <div class="parallax-img">
-                            <a href="movie-details.html">
-                                <img src="https://i.imgur.com/7Z8uqxN.jpg" class="img-fluid w-100" alt="bailey">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+            @Html.Partial("_PartialTop1Movie")
+        
     </div>
 </section>
 

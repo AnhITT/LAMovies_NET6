@@ -16,5 +16,9 @@ namespace LAMovies_NET6.Controllers
             var pricing = _pricingRepository.GetAllPricings().ToList();
             return View(pricing);
         }
+        public IActionResult PricingNone()
+        {
+            return View();
+        }
     }
 }

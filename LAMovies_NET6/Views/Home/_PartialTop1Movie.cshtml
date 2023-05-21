@@ -1,0 +1,47 @@
+﻿@using LAMovies_NET6.Models
+@{
+    var Movie = ViewBag.top1;
+}
+
+@if (Movie != null)
+{
+        <section id="parallex" class="parallax-window">
+            <div class="container-fluid h-100">
+                <div class="row align-items-center justify-content-center h-100 parallaxt-details">
+                    <div class="col-lg-4 r-mb-23">
+                        <div class="text-left">
+                            <h1 class="slider-text big-title title text-uppercase">@Movie.nameMovie</h1>
+                            <div class="movie-time d-flex align-items-center mb-3 mt-3">
+                                <div class="badge badge-danger p-2">@Movie.qualityMovie</div>
+                                <div class="ml-3 badge badge-secondary p-2">@Movie.minAgeMovie +</div>
+                                <span class="ml-3">@Movie.timeMovie</span>
+                            </div>
+                            <p>
+                                @Movie.descriptionMovie
+                            </p>
+                            <div class="parallax-buttons">
+                                <a onclick="window.location.href='/Movies/MovieDetail?movieId=@Movie.idMovie'" class="text-white btn btn-danger iq-button">
+                                    <i class="fa-solid fa-circle-info"></i>
+                                    More Details
+                                </a>
+                                <a href="@Movie.uriMovieTrailer"
+                                   class="video-open btn btn-danger iq-button ml-3">
+                                    <i class="fa-solid fa-tv"></i>
+                                    Watch Trailer
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="parallax-img">
+                            <a href="movie-details.html">
+                                <img src="@Movie.uriImgCover" class="img-fluid w-100" alt="bailey">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    }
+

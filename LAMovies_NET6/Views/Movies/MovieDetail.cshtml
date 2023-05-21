@@ -1,4 +1,8 @@
-﻿@model LAMovies_NET6.Models.Movie
+﻿@using LAMovies_NET6.Models
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+@model LAMovies_NET6.Models.Movie
 
 @{
     ViewData["Title"] = "MovieDetail";
@@ -44,10 +48,20 @@
                 @Model.descriptionMovie
             </p>
             <div class="d-flex align-items-center r-mb-23">
-                <a href="/Movies/WatchMovie?movieId=@Model.idMovie" class="btn btn-danger iq-button">
-                    <i class="fa-solid fa-play"></i>
-                    Play Now
-                </a>
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    <a href="/Movies/WatchMovie?movieId=@Model.idMovie" class="btn btn-danger iq-button">
+                        <i class="fa-solid fa-play"></i>
+                        Play Now
+                    </a>
+                }
+                else
+                {
+                    <a asp-controller="User" asp-action="ErrorLogin" class="btn btn-danger iq-button">
+                        <i class="fa-solid fa-play"></i>
+                        Play Now
+                    </a>
+                }
                 <a href="@Model.uriMovieTrailer"
                    class="video-open btn btn-danger iq-button ml-3">
                     <i class="fa-solid fa-tv"></i>
