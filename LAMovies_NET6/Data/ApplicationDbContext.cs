@@ -17,6 +17,8 @@ namespace LAMovies_NET6.Data
         public DbSet<Pricing>? Pricings { get; set; }
 
         public DbSet<UserPricing>? UserPricings { get; set; }
+        public DbSet<MovieHistory>? MovieHistorys { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -41,6 +43,18 @@ namespace LAMovies_NET6.Data
                     .HasOne(p => p.User)
                     .WithMany(pc => pc.UserPricing)
                     .HasForeignKey(c => c.idUser);
+
+            modelBuilder.Entity<MovieHistory>()
+                   .HasKey(pc => new { pc.idUser, pc.idMovie });
+            modelBuilder.Entity<MovieHistory>()
+                    .HasOne(p => p.Movie)
+                    .WithMany(pc => pc.MovieHistory)
+                    .HasForeignKey(p => p.idMovie);
+            modelBuilder.Entity<MovieHistory>()
+                    .HasOne(p => p.User)
+                    .WithMany(pc => pc.MovieHistory)
+                    .HasForeignKey(c => c.idUser);
+
 
             modelBuilder.Entity<IdentityUserLogin<string>>()
         .HasKey(l => new { l.LoginProvider, l.ProviderKey });

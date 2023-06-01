@@ -3,22 +3,28 @@ using LAMovies_NET6.Interfaces;
 using LAMovies_NET6.Models;
 using LAMovies_NET6.Models.DTO;
 using Microsoft.EntityFrameworkCore;
+using System.Collections;
 using System.Collections.Generic;
+using System.Security.Claims;
 
 namespace LAMovies_NET6.Repositories
 {
     public class MoviesRepository : IMoviesRepository
     {
         private readonly ApplicationDbContext _data;
-        public MoviesRepository(ApplicationDbContext context)
+        private readonly IHttpContextAccessor _httpContextAccessor;
+
+        public MoviesRepository(ApplicationDbContext context, IHttpContextAccessor httpContextAccessor)
         {
             _data = context;
+            _httpContextAccessor = httpContextAccessor; 
         }
 
         public bool Add(Movie model)
         {
             try
             {
+                model.viewMovie = 0;
                 _data.Movies.Add(model);
                 _data.SaveChanges();
                 AddMovieToGenre(model);
@@ -201,7 +207,71 @@ namespace LAMovies_NET6.Repositories
         public Movie Top1Movie()
         {
             var topMovie = _data.Movies.OrderByDescending(p => p.viewMovie).FirstOrDefault();
+            var list = new List<Movie>();
+            list.Add(topMovie);
+            DisplayGenresToMovie(list);
             return topMovie;
+        }
+
+        public List<Movie> MovieByGenre(int id)
+        {
+            List<MovieGenre> checkMovieGenres = _data.MovieGenres.Where(up => up.idMovie == id).ToList();
+            List<MovieGenre> matchedGenres = _data.MovieGenres.Where(mg => checkMovieGenres.Select(m => m.idGenre).Contains(mg.idGenre)).ToList();
+            List<Movie> movies = _data.Movies.Where(mov => matchedGenres.Select(m => m.idMovie).Contains(mov.idMovie)).ToList();
+            return movies;
+        }
+        public void SaveHistoryWatchedMovie(int id)
+        {
+            var user = _httpContextAccessor.HttpContext.User;
+            var userId = user.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var checkIdMovie = _data.MovieHistorys.FirstOrDefault(m => m.idMovie == id && m.idUser == userId);
+            if(checkIdMovie == null)
+            {
+                MovieHistory movieHistory = new MovieHistory()
+                {
+                    idMovie = id,
+                    idUser = userId,
+                    dateTimeWatch = DateTime.Now
+                };
+                _data.MovieHistorys.Add(movieHistory);
+                _data.SaveChanges();
+            }
+            else
+            {
+                checkIdMovie.dateTimeWatch = DateTime.Now;
+                _data.SaveChanges();
+            }
+        }
+
+        public List<Movie> HistoryMovieByUser()
+        {
+            var user = _httpContextAccessor.HttpContext.User;
+            var userId = user.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            List<MovieHistory> movieHistories = _data.MovieHistorys.Where(up => up.idUser == userId).ToList();
+            var movies = from h in movieHistories
+                         join m in _data.Movies on h.idMovie equals m.idMovie
+                        orderby h.dateTimeWatch descending
+                        select m;
+            return movies.ToList();
+        }
+        public List<HistoryMoviesDTO> GetHistoryMovies(List<Movie> movies)
+        {
+            var list = new List<HistoryMoviesDTO>();
+            var user = _httpContextAccessor.HttpContext.User;
+            var userId = user.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            foreach (var item in movies)
+            {
+                MovieHistory movieCheck = _data.MovieHistorys.FirstOrDefault(m => m.idMovie == item.idMovie && m.idUser == userId);
+                var movieHistory = new HistoryMoviesDTO()
+                {
+                    idMovie = item.idMovie,
+                    nameMovie = item.nameMovie,
+                    uriImg = item.uriImg,
+                    remainingTime = DateTime.Now - movieCheck.dateTimeWatch
+                };
+                list.Add(movieHistory);
+            }
+            return list;
         }
     }
 }

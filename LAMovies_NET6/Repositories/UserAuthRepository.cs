@@ -1,7 +1,9 @@
-﻿using LAMovies_NET6.Interfaces;
+﻿using LAMovies_NET6.Data;
+using LAMovies_NET6.Interfaces;
 using LAMovies_NET6.Models;
 using LAMovies_NET6.Models.DTO;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Identity.Client;
 using System.Security.Claims;
 
 namespace LAMovies_NET6.Repositories
@@ -12,7 +14,6 @@ namespace LAMovies_NET6.Repositories
         private readonly RoleManager<IdentityRole> roleManager;
         private readonly SignInManager<User> signInManager;
         private readonly IHttpContextAccessor _httpContextAccessor;
-
 
         public UserAuthRepository(UserManager<User> userManager,
             SignInManager<User> signInManager, RoleManager<IdentityRole> roleManager, IHttpContextAccessor httpContextAccessor)
@@ -97,8 +98,17 @@ namespace LAMovies_NET6.Repositories
                 {
                     authClaims.Add(new Claim(ClaimTypes.Role, userRole));
                 }
-                respone.statusCode = 1;
-                respone.message = "Logged in successfully";
+                var isInRole = await userManager.IsInRoleAsync(user, "admin");
+                if (isInRole)
+                {
+                    respone.statusCode = 1;
+                    respone.message = "Logged Admin in successfully";
+                }
+                else
+                {
+                    respone.statusCode = 2;
+                    respone.message = "Logged User in successfully";
+                }
             }
             else if (signInResult.IsLockedOut)
             {
@@ -113,7 +123,6 @@ namespace LAMovies_NET6.Repositories
 
             return respone;
         }
-
         public async Task LogoutAsync()
         {
             await signInManager.SignOutAsync();
@@ -135,7 +144,18 @@ namespace LAMovies_NET6.Repositories
             }
             return null; 
         }
+        public List<User> GetAllAccount()
+        {
+            var users = userManager.Users.ToList();
+            // Xử lý danh sách tài khoản ở đây
 
+            return users;
+        }
 
+        public async Task<User> GetAccountById(string id)
+        {
+            var user = await userManager.FindByIdAsync(id);
+            return user;
+        }
     }
 }

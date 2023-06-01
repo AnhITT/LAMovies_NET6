@@ -1,15 +1,16 @@
 ﻿@model LAMovies_NET6.Models.DTO.MovieListDTO
 
 @{
-    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
+
 
 <section style="padding-top: 30px" class="content">
     <div class="card">
         <div class="card-header">
             <h2 class="text-center">Danh sách phim</h2>
             <div class="card-tools">
-                <a href="/Admin/QLProduct/AddProduct" class="btn btn-success">Thêm phim</a>
+                <a asp-controller="Movies" asp-action="AddMovie" class="btn btn-success">Thêm phim</a>
             </div>
         </div>
         <div class="card-body">
@@ -41,15 +42,14 @@
                                 <td>@item.yearCreateMovie</td>
                                 <td>@item.viewMovie</td>
                                 <td>
-                                    <a href="/Admin/ImageProduct/Index/@item.idMovie" class="btn btn-sm btn-success"><i class="fa-solid fa-image"></i></a>
-                                    <a href="/Admin/QLProduct/AddSize/@item.idMovie" class="btn btn-sm btn-primary"><i class="fa-solid fa-shoe-prints"></i></a>
-                                    <a href="/Admin/QLProduct/EditProduct/@item.idMovie" class="btn btn-sm btn-primary"><i class="fa-solid fa-pen-to-square"></i></a>
-                                    <a href="#" data-id="@item.idMovie" class="btn btn-sm btn-danger btnDelete"><i class="fa fa-trash"></i></a>
+                                    <a asp-controller="Movies" asp-action="EditMovie" asp-route-id="@item.idMovie" class="btn btn-sm btn-primary"><i class="fa-solid fa-pen-to-square"></i></a>
+                                    <a href="/Movies/DeleteMovie?id=@item.idMovie" onclick="return window.confirm('Xác nhận xoá?')" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
+
                                 </td>
                             </tr>
 
                         }
-                        
+
                     }
                     else
                     {
@@ -57,19 +57,19 @@
                             <td colspan="7">Không có phim nào!!!</td>
                         </tr>
                     }
-                    </div>
-                </tbody>
-            </table>
+        </div>
+        </tbody>
+        </table>
         <div class="d-flex justify-content-center pt-2">
             @for (int i = 1; i <= Model.totalPages; i++)
             {
                 if (i == Model.currentPage)
                 {
-                    <a href="/Admin/Movie/QLMovies?currentPage=@i&term=@Model.term" class="active btn btn-outline-danger m-2">@i</a>
+                    <a href="/Movies/QLMovies?currentPage=@i&term=@Model.term" class="active btn btn-outline-danger m-1">@i</a>
                 }
                 else
                 {
-                    <a href="/Admin/Movie/QLMovies?currentPage=@i&term=@Model.term" class="btn btn-outline-danger m-2">@i</a>
+                    <a href="/Movies/QLMovies?currentPage=@i&term=@Model.term" class="btn btn-outline-danger m-1">@i</a>
 
                 }
             }

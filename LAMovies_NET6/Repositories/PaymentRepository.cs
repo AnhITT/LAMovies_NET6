@@ -1,6 +1,8 @@
 ﻿using LAMovies_NET6.Data;
 using LAMovies_NET6.Interfaces;
+using LAMovies_NET6.Migrations;
 using LAMovies_NET6.Models;
+using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 
 namespace LAMovies_NET6.Repositories
@@ -20,15 +22,60 @@ namespace LAMovies_NET6.Repositories
             var user = _httpContextAccessor.HttpContext.User;
             var userId = user.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             var pricing = _data.Pricings.FirstOrDefault(p => p.idPricing == id);
-            UserPricing userPricing = new UserPricing
+            var checkUserPricing = _data.UserPricings.FirstOrDefault(
+                                          up => up.idUser == userId);
+            if(checkUserPricing == null)
             {
-                idPricing = id,
-                idUser = userId,
-                startTime = DateTime.Now,
-                endTime = DateTime.Now.AddMonths(pricing.timePricing),
-            };
-            _data.Add(userPricing);
-            _data.SaveChanges();
+                UserPricing userPricing = new UserPricing
+                {
+                    idPricing = id,
+                    idUser = userId,
+                    startTime = DateTime.Now,
+                    endTime = DateTime.Now.AddMonths(pricing.timePricing),
+                };
+                _data.Add(userPricing);
+                _data.SaveChanges();
+            }
+            else
+            {
+                //Hết hạn
+                if (checkUserPricing.endTime < DateTime.Now)
+                {
+                    UserPricing updateUserPricing = new UserPricing()
+                    {
+                        idPricing = id,
+                        idUser = userId,
+                        startTime = DateTime.Now,
+                        endTime = DateTime.Now.AddMonths(pricing.timePricing),
+                    };
+                    _data.Remove(checkUserPricing);
+                    _data.Add(updateUserPricing);
+                    _data.SaveChanges();
+                }
+                //Chưa hết hạn, đăng ký thêm
+                else
+                {
+
+                    UserPricing updateUserPricing = new UserPricing()
+                    {
+                        idUser = userId,
+                        endTime = checkUserPricing.endTime.AddMonths(pricing.timePricing),
+                        startTime = checkUserPricing.startTime,
+                    };
+                    if (id > checkUserPricing.idPricing)
+                    {
+                        updateUserPricing.idPricing = id;
+                    }
+                    else
+                    {
+                        updateUserPricing.idPricing = checkUserPricing.idPricing;
+                    }
+                    _data.Remove(checkUserPricing);
+                    _data.Add(updateUserPricing);
+                    _data.SaveChanges();
+                }
+            }
+            
         }
         
     }

@@ -37,8 +37,6 @@ namespace LAMovies_NET6.Controllers
             ViewBag.InfoPricing = pricingInfo;
             return View();
         }
-        
-
         [Authorize]
         public async System.Threading.Tasks.Task<IActionResult> PaypalCheckout(int idPricing)
         {
@@ -81,7 +79,7 @@ namespace LAMovies_NET6.Controllers
                 RedirectUrls = new RedirectUrls()
                 {
                     CancelUrl = $"{hostname}/Payment/CheckoutFail",
-                    ReturnUrl = $"{hostname}/Payment/CheckoutSuccess"
+                    ReturnUrl = $"{hostname}/Payment/CheckoutSuccess?idPricing={idPricing}"
                 },
                 Payer = new Payer()
                 {
@@ -107,8 +105,8 @@ namespace LAMovies_NET6.Controllers
                         paypalRedirectUrl = lnk.Href;
                     }
                 }
-                _paymentRepository.SaveDataService(pricing.idPricing);
                 return Redirect(paypalRedirectUrl);
+
             }
             catch (HttpException httpException)
             {
@@ -125,8 +123,9 @@ namespace LAMovies_NET6.Controllers
             return View();
         }
 
-        public IActionResult CheckoutSuccess()
+        public IActionResult CheckoutSuccess(int idPricing)
         {
+            _paymentRepository.SaveDataService(idPricing);
             return View();
         }
 

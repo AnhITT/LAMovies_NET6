@@ -9,5 +9,7 @@ namespace LAMovies_NET6.Interfaces
         Task<Respone> LoginAsync(LoginDTO model);
         Task LogoutAsync();
         Task<User> GetInfoAccount();
+        List<User> GetAllAccount();
+        Task<User> GetAccountById(string id);
     }
 }

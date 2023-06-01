@@ -19,6 +19,10 @@ namespace LAMovies_NET6.Interfaces
         List<Movie> GetTop5MovieView();
         List<Movie> SortDate();
         Movie Top1Movie();
+        List<Movie> MovieByGenre(int id);
+        void SaveHistoryWatchedMovie(int id);
+        List<Movie> HistoryMovieByUser();
+        List<HistoryMoviesDTO> GetHistoryMovies(List<Movie> movies);
 
     }
 }

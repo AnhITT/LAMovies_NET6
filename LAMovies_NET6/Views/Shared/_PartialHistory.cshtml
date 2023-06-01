@@ -1,0 +1,64 @@
+﻿@using LAMovies_NET6.Models.DTO
+@{
+    var Movie = TempData["movieNotify"] as List<HistoryMoviesDTO>;
+}
+
+<li class="nav-item nav-icon">
+    <a href="#" class="search-toggle position-relative">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22"
+             height="22" class="noti-svg">
+            <path fill="none" d="M0 0h24v24H0z" />
+            <path d="M18 10a6 6 0 1 0-12 0v8h12v-8zm2 8.667l.4.533a.5.5 0 0 1-.4.8H4a.5.5 0 0 1-.4-.8l.4-.533V10a8 8 0 1 1 16 0v8.667zM9.5 21h5a2.5 2.5 0 1 1-5 0z" />
+        </svg>
+        <span class="bg-danger dots"></span>
+    </a>
+    <div class="iq-sub-dropdown">
+        <div class="iq-card shadow-none m-0">
+            <div class="iq-card-body">
+                @if (Movie != null)
+                {
+                    @foreach(var item in Movie)
+                    {
+                                <a href="/Movies/WatchMovie?movieId=@item.idMovie" class="iq-sub-card">
+                            <div class="media align-items-center">
+                                <img src="@item.uriImg" class="img-fluid mr-3" width="64px" />
+                                <div class="media-body">
+                                    <h6 class="mb-0 ">@item.nameMovie</h6>
+                                    @{
+                                        TimeSpan remainingTime = item.remainingTime;
+                                        string formattedTime;
+
+                                        if (remainingTime.TotalHours < 1)
+                                        {
+                                            formattedTime = $"{remainingTime.Minutes} minutes ago";
+                                        }
+                                        else if (remainingTime.TotalDays < 1)
+                                        {
+                                            formattedTime = $"{remainingTime.Hours} hours {remainingTime.Minutes} minutes ago";
+                                        }
+                                        else
+                                        {
+                                            formattedTime = $"{remainingTime.Days} days ago";
+                                        }
+                                    }
+                                    <small class="font-size-12">@formattedTime </small>
+                                </div>
+                            </div>
+                        </a>
+                    }
+                    
+                }
+                else
+                {
+                    <a href="#" class="iq-sub-card">
+                        <div class="media align-items-center">
+                            <div class="media-body">
+                                <h6 class="mb-0 ">You don't have any notifications!!</h6>
+                            </div>
+                        </div>
+                    </a>
+                }
+            </div>
+        </div>
+    </div>
+</li>

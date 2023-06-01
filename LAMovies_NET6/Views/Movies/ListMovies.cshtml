@@ -6,56 +6,71 @@
 
 <section id="home" class="iq-main-slider pt-4">
     <div class="main-content">
-        <section class="list-movies">
-            <div class="container">
-                <h2 class="h2 section-title text-center">Movies</h2>
-                <ul class="movies-list">
-                    @foreach (var item in Model.MovieList)
-                    {
-                        <li>
-                            <div class="movie-card" onclick="window.location.href='/Movies/MovieDetail?movieId=@item.idMovie'">
-                                <a href="#">
-                                    <figure class="card-banner">
-                                        <img src="@item.uriImg" alt="Morbius movie poster">
-                                    </figure>
-                                </a>
-
-                                <div class="title-wrapper text-center">
+        @if (Model.MovieList != null)
+        {
+            <section class="list-movies">
+                <div class="container">
+                    <h2 class="h2 section-title text-center">Movies</h2>
+                    <ul class="movies-list">
+                        @foreach (var item in Model.MovieList)
+                        {
+                            <li>
+                                <div class="movie-card" onclick="window.location.href='/Movies/MovieDetail?movieId=@item.idMovie'">
                                     <a href="#">
-                                        <h3 class="card-title">@item.nameMovie</h3>
+                                        <figure class="card-banner">
+                                            <img src="@item.uriImg" alt="Morbius movie poster">
+                                        </figure>
                                     </a>
 
+                                    <div class="title-wrapper text-center">
+                                        <a href="#">
+                                            <h3 class="card-title">@item.nameMovie</h3>
+                                        </a>
+
+                                    </div>
+                                    <div class="card-meta d-flex justify-content-center">
+
+                                        <div class="badge-old badge-outline-old">@item.viewMovie view</div>
+
+                                        <div class="badge-movie badge-outline">@item.qualityMovie</div>
+
+                                        <div class="badge-time badge-outline-time">@item.minAgeMovie +</div>
+
+                                    </div>
+
                                 </div>
-                                <div class="card-meta d-flex justify-content-center">
+                            </li>
+                        }
+                    </ul>
+                </div>
 
-                                    <div class="badge-old badge-outline-old">@item.viewMovie view</div>
-
-                                    <div class="badge-movie badge-outline">@item.qualityMovie</div>
-
-                                    <div class="badge-time badge-outline-time">@item.minAgeMovie +</div>
-
-                                </div>
-
-                            </div>
-                        </li>
-                    }
-                </ul>
-            </div>
-
-            <div class="d-flex justify-content-center pt-2">
-                @for (int i = 1; i <= Model.totalPages; i++)
-                {
-                    if (i == Model.currentPage)
+                <div class="d-flex justify-content-center pt-2">
+                    @for (int i = 1; i <= Model.totalPages; i++)
                     {
-                        <a href="/Movies/ListMovies?currentPage=@i&term=@Model.term" class="active btn btn-outline-danger m-2">@i</a>
-                    }
-                    else
-                    {
-                        <a href="/Movies/ListMovies?currentPage=@i&term=@Model.term" class="btn btn-outline-danger m-2">@i</a>
+                        if (i == Model.currentPage)
+                        {
+                            <a href="/Movies/ListMovies?currentPage=@i&term=@Model.term" class="active btn btn-outline-danger m-2">@i</a>
+                        }
+                        else
+                        {
+                            <a href="/Movies/ListMovies?currentPage=@i&term=@Model.term" class="btn btn-outline-danger m-2">@i</a>
 
+                        }
                     }
-                }
-            </div>
-        </section>
-        </div>
+                </div>
+            </section>
+        }
+        else
+        {
+            <section class="list-movies">
+                <div class="container">
+                    <h2 class="h2 section-title text-center">Movies</h2>
+                    <ul class="movies-list">
+                        <h2 class="h2 section-title text-center">No Movies</h2>
+                    </ul>
+                </div>
+            </section>
+
+        }
+    </div>
 </section>

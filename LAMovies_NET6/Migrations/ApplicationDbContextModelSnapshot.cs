@@ -48,6 +48,7 @@ namespace LAMovies_NET6.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("idMovie"));
 
                     b.Property<string>("descriptionMovie")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("minAgeMovie")
@@ -113,6 +114,33 @@ namespace LAMovies_NET6.Migrations
                     b.HasIndex("idGenre");
 
                     b.ToTable("MovieGenres");
+                });
+
+            modelBuilder.Entity("LAMovies_NET6.Models.MovieHistory", b =>
+                {
+                    b.Property<string>("idUser")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("idMovie")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("dateTimeWatch")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("minutes")
+                        .HasColumnType("int");
+
+                    b.Property<TimeSpan?>("remainingTime")
+                        .HasColumnType("time");
+
+                    b.Property<bool?>("status")
+                        .HasColumnType("bit");
+
+                    b.HasKey("idUser", "idMovie");
+
+                    b.HasIndex("idMovie");
+
+                    b.ToTable("MovieHistorys");
                 });
 
             modelBuilder.Entity("LAMovies_NET6.Models.Pricing", b =>
@@ -351,6 +379,25 @@ namespace LAMovies_NET6.Migrations
                     b.Navigation("Movie");
                 });
 
+            modelBuilder.Entity("LAMovies_NET6.Models.MovieHistory", b =>
+                {
+                    b.HasOne("LAMovies_NET6.Models.Movie", "Movie")
+                        .WithMany("MovieHistory")
+                        .HasForeignKey("idMovie")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("LAMovies_NET6.Models.User", "User")
+                        .WithMany("MovieHistory")
+                        .HasForeignKey("idUser")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Movie");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("LAMovies_NET6.Models.UserPricing", b =>
                 {
                     b.HasOne("LAMovies_NET6.Models.Pricing", "Pricing")
@@ -378,6 +425,8 @@ namespace LAMovies_NET6.Migrations
             modelBuilder.Entity("LAMovies_NET6.Models.Movie", b =>
                 {
                     b.Navigation("MovieGenre");
+
+                    b.Navigation("MovieHistory");
                 });
 
             modelBuilder.Entity("LAMovies_NET6.Models.Pricing", b =>
@@ -387,6 +436,8 @@ namespace LAMovies_NET6.Migrations
 
             modelBuilder.Entity("LAMovies_NET6.Models.User", b =>
                 {
+                    b.Navigation("MovieHistory");
+
                     b.Navigation("UserPricing");
                 });
 #pragma warning restore 612, 618

@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewData["Title"] = "PricingEx";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    DateTime? dateExpired = null;
+    var pricingExpired = ViewBag.CheckPricingExpired;
+    if (pricingExpired != null)
+    {
+        dateExpired = pricingExpired.endTime;
+    }
+
+}
+
+<div class="iq-breadcrumb-one iq-bg-over iq-over-dark-50">
+    <div class="container-fluid pb-5">
+        <div class="row align-items-center pb-5">
+            <div class="col-sm-12">
+                <nav aria-label="breadcrumb" class="text-center iq-breadcrumb-two">
+                    <ol class="breadcrumb main-bg">
+                        <li class="breadcrumb-item h3">Your service has expired on @dateExpired</li>
+                        <li class="breadcrumb-item h3 active">Please subscribe to the service to watch movies</li>
+                    </ol>
+                </nav>
+                <h2 class="d-flex justify-content-center"><a asp-action="Pricing" asp-controller="Pricing" class="btn btn-outline-danger">Register Service</a></h2>
+            </div>
+        </div>
+    </div>
+</div>

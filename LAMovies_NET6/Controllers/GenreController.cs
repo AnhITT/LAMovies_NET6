@@ -1,6 +1,8 @@
 ﻿using LAMovies_NET6.Interfaces;
 using LAMovies_NET6.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Data;
 
 namespace LAMovies_NET6.Controllers
 {
@@ -11,45 +13,43 @@ namespace LAMovies_NET6.Controllers
         {
             _genreRepository = genreRepository;
         }
-        public IActionResult Add()
+        [Authorize(Roles = "admin")]
+        public IActionResult AddGenre()
         {
             return View();
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPost]
-        public IActionResult Add(Genre model)
+        public IActionResult AddGenre(Genre model)
         {
             if (!ModelState.IsValid)
-                return View(model);
-            var result = _genreRepository.Add(model);
-            if (result)
             {
-                TempData["msg"] = "Added Successfully";
-                return RedirectToAction(nameof(Add));
+                _genreRepository.Add(model);
+                return Redirect("QLGenres");
             }
             else
             {
                 TempData["msg"] = "Error on server side";
-                return View(model);
+                return View("add", model);
             }
         }
 
-        public IActionResult Edit(int id)
+        [Authorize(Roles = "admin")]
+        public IActionResult EditGenre(int id)
         {
             var data = _genreRepository.GetById(id);
             return View(data);
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPost]
-        public IActionResult Update(Genre model)
+        public IActionResult EditGenre(Genre model)
         {
             if (!ModelState.IsValid)
-                return View(model);
-            var result = _genreRepository.Update(model);
-            if (result)
             {
-                TempData["msg"] = "Added Successfully";
-                return RedirectToAction(nameof(GenreList));
+                _genreRepository.Update(model);
+                return Redirect("../QLGenres");
             }
             else
             {
@@ -58,16 +58,26 @@ namespace LAMovies_NET6.Controllers
             }
         }
 
-        public IActionResult GenreList()
+        [Authorize(Roles = "admin")]
+        public IActionResult QLGenres()
         {
-            ViewBag.genresList = _genreRepository.GetGenresList();
-            return PartialView("_PartialGenre", ViewBag.genresList);
+            var genre = _genreRepository.GetGenresList();
+            return View(genre);
         }
 
-        public IActionResult Delete(int id)
+        [Authorize(Roles = "admin")]
+        public IActionResult DeleteGenre(int id)
         {
             var result = _genreRepository.Delete(id);
-            return RedirectToAction(nameof(GenreList));
+            return RedirectToAction(nameof(QLGenres));
+        }
+        [Authorize(Roles = "admin")]
+        public IActionResult ShowList(int id)
+        {
+            var listMovie = _genreRepository.GetMoviesByGenres(id);
+            var genre = _genreRepository.GetById(id);
+            ViewBag.nameGenre = genre.nameGenre;
+            return View(listMovie);
         }
 
         public IActionResult ListMovieByGenres(int id)

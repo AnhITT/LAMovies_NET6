@@ -69,7 +69,7 @@
 
 
                         <!-- item-->
-                        <a href="Dangxuat" class="dropdown-item notify-item">
+                        <a asp-controller="User" asp-action="Logout" class="dropdown-item notify-item">
                             <i class="mdi mdi-logout me-1"></i>
                             <span>Đăng xuất</span>
                         </a>
@@ -111,55 +111,48 @@
                     <li class="side-nav-title side-nav-item">Navigation</li>
 
                     <li class="side-nav-item">
-                        <a href="/Admin/Admin/Index" class="side-nav-link">
+                        <a asp-controller="Home" asp-action="Dashboard" class="side-nav-link">
                             <i class="uil-home-alt"></i>
                             <span> Trang chủ </span>
                         </a>
                     </li>
 
                     <li class="side-nav-item">
-                        <a href="/Admin/Brand/Index" class="side-nav-link">
-                            <i class="fa-regular fa-copyright"></i>
+                        <a asp-controller="Movies" asp-action="QLMovies" class="side-nav-link">
+                            <i class="fa-solid fa-film"></i>
                             <span> Quản lý phim </span>
                         </a>
                     </li>
                     <li class="side-nav-item">
-                        <a href="/Admin/Category/Index" class="side-nav-link">
+                        <a asp-controller="Genre" asp-action="QLGenres" class="side-nav-link">
                             <i class="uil-tag-alt"></i>
                             <span> Quản lý thể loại </span>
                         </a>
                     </li>
                     <li class="side-nav-item">
                         <a href="/Admin/QLProduct/QLProduct" class="side-nav-link">
-                            <i class="uil-cart"></i>
+                            <i class="fa-solid fa-user-secret"></i>
                             <span> Quản lý diễn viên </span>
                         </a>
                     </li>
                     <li class="side-nav-item">
-                        <a href="/Admin/QLOrder/QLOrder" class="side-nav-link">
-                            <i class="uil-invoice"></i>
+                        <a asp-controller="Pricing" asp-action="QLPricing" class="side-nav-link">
+                            <i class="fa-brands fa-servicestack"></i>
                             <span> Quản lý dịch vụ </span>
                         </a>
                     </li>
-
-                        <li class="side-nav-item">
-                        <a data-bs-toggle="collapse" href="#sidebarEcommerce" aria-expanded="false" aria-controls="sidebarEcommerce" class="side-nav-link">
+                    <li class="side-nav-item">
+                        <a asp-controller="User" asp-action="QLAccount" class="side-nav-link">
                             <i class="uil-users-alt"></i>
                             <span> Quản lý tài khoản </span>
-                            <span class="menu-arrow"></span>
                         </a>
-                        <div class="collapse" id="sidebarEcommerce">
-                            <ul class="side-nav-second-level">
-                                <li>
-                                    <a href="/Admin/QLTaiKhoan/QLTaiKhoanKH">Tài khoản khách hàng</a>
-                                </li>
-                                <li>
-                                    <a href="/Admin/QLTaiKhoan/QLTaiKhoanAdmin">Tài khoản hệ thống</a>
-                                </li>
-                            </ul>
-                        </div>
                     </li>
-
+                    <li class="side-nav-item">
+                        <a asp-controller="Pricing" asp-action="QLUserPricing" class="side-nav-link">
+                            <i class="fa-solid fa-business-time"></i>
+                            <span> Quản lý gói cước </span>
+                        </a>
+                    </li>
 
                     <!--
 

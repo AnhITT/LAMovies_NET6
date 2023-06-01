@@ -8,17 +8,28 @@ namespace LAMovies_NET6.Models
     {
         [Key]
         public int idMovie { get; set; }
+        [Required]
         public string nameMovie { get; set; }
+        [Required]
         public string? descriptionMovie { get; set; }
+        [Required]
         public string uriMovie { get; set; }
+        [Required]
         public string uriMovieTrailer { get; set; }
+        [Required]
         public string uriImg { get; set; }
+        [Required]
         public string uriImgCover { get; set; }
 
+        [Required]
         public string subLanguageMovie { get; set; }
+        [Required]
         public int minAgeMovie { get; set; }
+        [Required]
         public string qualityMovie { get; set; }
+        [Required]
         public string timeMovie { get; set; }
+        [Required]
         public string yearCreateMovie { get; set; }
         public int viewMovie { get; set; }
         public ICollection<MovieGenre> MovieGenre { get; set; }
@@ -29,6 +40,10 @@ namespace LAMovies_NET6.Models
         public IEnumerable<SelectListItem>? GenreList { get; set; }
         [NotMapped]
         public List<string>? GenreNames { get; set; }
+        [NotMapped]
+        public MultiSelectList? MultiGenreList { get; set; }
+        public ICollection<MovieHistory> MovieHistory { get; set; }
+
 
     }
 }

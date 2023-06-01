@@ -1,0 +1,162 @@
+﻿@model LAMovies_NET6.Models.Movie
+
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item h5"><a asp-controller="Movies" asp-action="QLMovies"><i class="fa-solid fa-film"></i> Quản lý phim</a></li>
+        <li class="breadcrumb-item h5">Chỉnh sửa phim</li>
+    </ol>
+</nav>
+<section class="bg-image">
+    <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+        <div class="container h-100">
+            <div class="row d-flex justify-content-center align-items-center">
+                <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+                    <div class="card" style="border-radius: 15px;">
+                        <div class="card-body p-5">
+                            <h2 class="text-uppercase text-center ">Chỉnh sửa phim</h2>
+                            <form asp-action="AddMovie" method="post">
+                                <div>
+                                    Nhập tên phim
+                                    <div>
+                                        <input type="text" class="form-control" asp-for="nameMovie">
+                                        <span class="text-danger" asp-validation-for="nameMovie"> </span>
+
+                                    </div>
+                                </div>
+                                <div class="pt-1">
+                                    Nhập mô tả
+                                    <div>
+                                        <input type="text" class="form-control" asp-for="descriptionMovie">
+                                        <span class="text-danger" asp-validation-for="descriptionMovie"> </span>
+
+                                    </div>
+                                </div>
+                                <div class="pt-1">
+                                    Nhập URL phim
+                                    <div>
+                                        <input type="text" class="form-control" asp-for="uriMovie">
+                                        <span class="text-danger" asp-validation-for="uriMovie"> </span>
+
+                                    </div>
+                                </div>
+                                <div class="pt-1">
+                                    Nhập URL trailer
+                                    <div>
+                                        <input type="text" class="form-control" asp-for="uriMovieTrailer">
+                                        <span class="text-danger" asp-validation-for="uriMovieTrailer"> </span>
+
+                                    </div>
+                                </div>
+                                <div class="pt-1">
+                                    Nhập ảnh đại diện
+                                    <div>
+                                        <input type="text" class="form-control" asp-for="uriImg">
+                                        <span class="text-danger" asp-validation-for="uriImg"> </span>
+
+                                    </div>
+                                </div>
+                                <div class="pt-1">
+                                    Nhập ảnh cover
+                                    <div>
+                                        <input type="text" class="form-control" asp-for="uriImgCover">
+                                        <span class="text-danger" asp-validation-for="uriImgCover"> </span>
+
+                                    </div>
+                                </div>
+                                <div class="pt-1">
+                                    Nhập thời gian phim
+                                    <div>
+                                        <input type="text" class="form-control" asp-for="timeMovie">
+                                        <span class="text-danger" asp-validation-for="timeMovie"> </span>
+
+                                    </div>
+                                </div>
+                                <div class="pt-1">
+                                    Nhập năm sản xuất
+                                    <select asp-for="yearCreateMovie" class="form-select form-select">
+                                        <option selected>--Chọn năm sản xuất--</option>
+                                        <option value="2010">2010</option>
+                                        <option value="2011">2011</option>
+                                        <option value="2012">2012</option>
+                                        <option value="2013">2013</option>
+                                        <option value="2014">2014</option>
+                                        <option value="2015">2015</option>
+                                        <option value="2016">2016</option>
+                                        <option value="2017">2017</option>
+                                        <option value="2018">2018</option>
+                                        <option value="2019">2019</option>
+                                        <option value="2020">2020</option>
+                                        <option value="2021">2021</option>
+                                        <option value="2022">2022</option>
+                                        <option value="2023">2023</option>
+                                    </select>
+                                    <span class="text-danger" asp-validation-for="yearCreateMovie"> </span>
+
+                                </div>
+                                <div class="pt-1">
+                                    Nhập ngôn ngữ
+                                    <select asp-for="subLanguageMovie" class="form-select form-select">
+                                        <option selected>--Chọn ngôn ngữ--</option>
+                                        <option value="VietNam">VietNam</option>
+                                        <option value="America">America</option>
+                                        <option value="Korea">Korea</option>
+                                        <option value="China">China</option>
+                                        <option value="Japan">Japan</option>
+                                        <option value="India">India</option>
+                                        <option value="England">England</option>
+                                    </select>
+                                    <span class="text-danger" asp-validation-for="subLanguageMovie"> </span>
+
+                                </div>
+                                <div class="pt-1">
+                                    Nhập độ tuổi
+                                    <div>
+                                        <input type="number" class="form-control" asp-for="minAgeMovie">
+                                        <span class="text-danger" asp-validation-for="minAgeMovie"> </span>
+
+                                    </div>
+                                </div>
+                                <div class="pt-1">
+                                    Nhập chất lượng phim
+                                    <select asp-for="qualityMovie" class="form-select form-select">
+                                        <option selected>--Nhập chất lượng phim--</option>
+                                        <option value="HD">HD</option>
+                                        <option value="FHD">FHD</option>
+                                        <option value="2K">2K</option>
+                                        <option value="4K">4K</option>
+                                    </select>
+                                    <span class="text-danger" asp-validation-for="qualityMovie"> </span>
+
+                                </div>
+                                <div>
+
+                                    <label asp-for="Genres" class="pt-1">Genre</label>
+                                    <div class="input-container">
+                                        <select asp-items="Model.MultiGenreList" class="input form-select" asp-for="Genres" multiple>
+                                            <option value="">--Lựa chọn thể loại--</option>
+                                        </select>
+                                        <span class="text-danger" asp-validation-for="Genres"> </span>
+
+                                    </div>
+                                </div>
+                                @if (TempData["msg"] != null)
+                                {
+                                    <div class="alert text-danger">
+                                        @TempData["msg"]
+                                    </div>
+                                }
+                                <div class="d-flex justify-content-center align-items-center">
+                                    <a class="btn btn-dark" asp-controller="Movies" asp-action="QLMovies"><i class="fa-solid fa-chevron-left"></i> Quay lại</a>
+                                    <input type="submit" value="Chỉnh sửa phim" class="btn btn-success m-3" />
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

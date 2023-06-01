@@ -1,0 +1,36 @@
+﻿@using LAMovies_NET6.Models
+@{
+    var Movie = ViewBag.moviesGenres;
+}
+
+@if (Movie != null)
+{
+    @foreach (var item in Movie)
+    {
+        <li class="slide-item">
+            <div class="block-images position-relative">
+                <div class="img-box">
+                    <img src="@item.uriImgCover" class="img-fluid" alt="">
+                </div>
+                <div class="block-description">
+                    <h6 class="iq-title"><a href="movie-details.html">@item.nameMovie</a></h6>
+                    <div class="movie-time d-flex align-items-center my-2">
+                        <div class="badge-hd badge-danger p-1 mr-2">@item.qualityMovie</div>
+                        <div class="badge badge-secondary p-1 mr-2">@item.minAgeMovie +</div>
+                        <span class="text-white">@item.timeMovie</span>
+                    </div>
+                    <div class="hover-buttons text-center">
+                        <span class="btn btn-danger iq-button" onclick="window.location.href='/Movies/MovieDetail?movieId=@item.idMovie'">
+                            <i class="fa-solid fa-circle-info"></i>
+                            More Details
+                        </span>
+                        <a href="@item.uriMovieTrailer" class="video-open btn btn-danger iq-button ml-2">
+                            <i class="fa-solid fa-tv"></i>
+                            Trailer
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </li>
+    }
+}

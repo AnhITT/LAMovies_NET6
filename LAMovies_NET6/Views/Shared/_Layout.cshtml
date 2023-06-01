@@ -129,107 +129,55 @@
                                     </ul>
                                 </div>
                             </div>
-                            @*
                             <div class="mobile-more-menu">
-                            <a href="javascript:void(0);" class="more-toggle" id="dropdownMenuButton"
-                            data-toggle="more-toggle" aria-haspopup="true" aria-expanded="false">
-                            <i class="fa-solid fa-user"></i>
-                            </a>
-                            <div class="more-menu" aria-labelledby="dropdownMenuButton">
-                            <div class="navbar-right position-relative">
-                            <ul class="d-flex align-items-center justify-content-end list-inline m-0">
-                            <li>
-                            <a href="#" class="search-toggle">
-                            <i class="fa-solid fa-magnifying-glass"></i>
-                            </a>
-                            <div class="search-box iq-search-bar">
-                            <form action="#" class="searchbox">
-                            <div class="form-group position-relative">
-                            <input type="text" class="text search-input font-size-12"
-                            placeholder="Search movie...">
-                            </div>
-                            </form>
-                            </div>
-                            </li>
+                                <a href="javascript:void(0);" class="more-toggle" id="dropdownMenuButton"
+                                   data-toggle="more-toggle" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fa-solid fa-bars"></i>
+                                </a>
+                                <div class="more-menu" aria-labelledby="dropdownMenuButton">
+                                    <div class="navbar-right position-relative">
+                                        <ul class="d-flex align-items-center justify-content-end list-inline m-0">
+                                            <li class="nav-item nav-icon">
+                                                <a href="#" class="search-toggle device-search">
+                                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                                </a>
+                                                <div class="search-box iq-search-bar d-search">
+                                                    <form method="get" asp-action="ListMovies" asp-controller="Movies" class="searchbox">
+                                                        <div class="form-group position-relative">
+                                                            <input type="text" name="term" class="text search-input font-size-12"
+                                                                   placeholder="Search movie...">
+                                                            <i class="fa-solid fa-magnifying-glass search-link pt-1"></i>
 
-                            <a href="#" class="iq-user-dropdown search-toggle d-flex align-items-center">
-                            <img src="~/image/Avatar/avatar-default.png" class="img-fluid avatar-40 rounded-circle"
-                            alt="user">
-                            </a>
-                            <div class="iq-sub-dropdown iq-user-dropdown">
-                            <div class="iq-card shadow-none m-0">
-                            <div class="iq-card-body p-0 pl-3 pr-3">
-                            <a href="manage-profile.html" class="iq-sub-card setting-dropdown">
-                            <div class="media align-items-center">
-                            <div class="right-icon">
-                            <i class="ri-file-user-line text-primary"></i>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </li>
+                                            @Html.Partial("_PartialHistory")
+                                            @Html.Partial("_LoginPartial")
+                                        </ul>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="media-body ml-3">
-                            <h6 class="mb-0 ">Manage Profile</h6>
-                            </div>
-                            </div>
-                            </a>
-                            <a href="setting.html" class="iq-sub-card setting-dropdown">
-                            <div class="media align-items-center">
-                            <div class="right-icon">
-                            <i class="ri-settings-4-line text-primary"></i>
-                            </div>
-                            <div class="media-body ml-3">
-                            <h6 class="mb-0 ">Settings</h6>
-                            </div>
-                            </div>
-                            </a>
-                            <a href="pricing-plan.html" class="iq-sub-card setting-dropdown">
-                            <div class="media align-items-center">
-                            <div class="right-icon">
-                            <i class="ri-settings-4-line text-primary"></i>
-                            </div>
-                            <div class="media-body ml-3">
-                            <h6 class="mb-0 ">Pricing Plan</h6>
-                            </div>
-                            </div>
-                            </a>
-                            <a href="login.html" class="iq-sub-card setting-dropdown">
-                            <div class="media align-items-center">
-                            <div class="right-icon">
-                            <i class="ri-logout-circle-line text-primary"></i>
-                            </div>
-                            <div class="media-body ml-3">
-                            <h6 class="mb-0">Logout</h6>
-                            </div>
-                            </div>
-                            </a>
-                            </div>
-                            </div>
-                            </div>
-
-
-
-                            </li>
-                            </ul>
-                            </div>
-                            </div>
-                            </div>
-
-                            *@
                             <div class="navbar-right menu-right">
                                 <ul class="d-flex align-items-center list-inline m-0">
+                                   
                                     <li class="nav-item nav-icon">
                                         <a href="#" class="search-toggle device-search">
                                             <i class="fa-solid fa-magnifying-glass"></i>
                                         </a>
                                         <div class="search-box iq-search-bar d-search">
-                                            <form action="#" class="searchbox">
+                                            <form method="get" asp-action="ListMovies" asp-controller="Movies" class="searchbox">
                                                 <div class="form-group position-relative">
-                                                    <input type="text" class="text search-input font-size-12"
+                                                    <input type="text" name="term" class="text search-input font-size-12"
                                                            placeholder="Search movie...">
+                                                    <i class="fa-solid fa-magnifying-glass search-link pt-1"></i>
+
                                                 </div>
                                             </form>
                                         </div>
                                     </li>
-
+                                        @Html.Partial("_PartialHistory")
                                     @Html.Partial("_LoginPartial")
-                                       
                                 </ul>
                             </div>
                         </nav>

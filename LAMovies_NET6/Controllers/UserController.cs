@@ -8,10 +8,13 @@ namespace LAMovies_NET6.Controllers
     public class UserController : Controller
     {
         private readonly IUserAuthRepository _userAuthRepository;
+        private readonly IPricingRepository _pricingRepository;
 
-        public UserController(IUserAuthRepository userAuthRepository)
+
+        public UserController(IUserAuthRepository userAuthRepository, IPricingRepository pricingRepository)
         {
             _userAuthRepository = userAuthRepository;
+            _pricingRepository = pricingRepository;
         }
         public IActionResult Login()
         {
@@ -23,9 +26,13 @@ namespace LAMovies_NET6.Controllers
             if (!ModelState.IsValid)
                 return View(model);
             var result = await _userAuthRepository.LoginAsync(model);
-            if (result.statusCode == 1)
+            if (result.statusCode == 2)
             {
                 return RedirectToAction("Index", "Home");
+            }
+            else if(result.statusCode == 1)
+            {
+                return Redirect("/Home/Dashboard");
             }
             else
             {
@@ -67,6 +74,35 @@ namespace LAMovies_NET6.Controllers
         public IActionResult ErrorLogin()
         {
             return View();
+        }
+        [Authorize]
+        [HttpGet]
+        public async Task<IActionResult> DisplayInfoUser(int id)
+        {
+            var user = await _userAuthRepository.GetInfoAccount();
+            ViewBag.InfoUser = user;
+            return View();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditInfoUser(int id)
+        {
+            var user = await _userAuthRepository.GetInfoAccount();
+            ViewBag.InfoUser = user;
+            return View();
+        }
+        public async Task<IActionResult> InfoServiceUser()
+        {
+            var pricing = await _pricingRepository.GetPricingByUser();
+            var pricingEx = await _pricingRepository.CheckPricingExpired();
+            ViewBag.CheckPricingExpired = pricingEx;
+            return View(pricing);
+        }
+        [Authorize(Roles = "admin")]
+        public IActionResult QLAccount()
+        {
+            var account = _userAuthRepository.GetAllAccount();
+            return View(account);
         }
     }
 }

@@ -1,0 +1,62 @@
+﻿@model IEnumerable<LAMovies_NET6.Models.DTO.ListUserPricingDTO>
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+<section style="padding-top: 30px" class="content">
+    <div class="card">
+        <div class="card-header">
+            <h2 class="text-center">Danh sách gói cước</h2>
+        </div>
+        <div class="card-body">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Tài khoản</th>
+                        <th>Tên khách hàng</th>
+                        <th>Tên gói cước max</th>
+                        <th>Thời gian bắt đầu</th>
+                        <th>Thời gian kết thúc</th>
+                        <th>Thời gian còn lại</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null)
+                    {
+                        foreach (var item in Model)
+                        {
+
+                            <tr>
+                                <td>@item.usernameUser</td>
+                                <td>@item.fullNameUser</td>
+                                <td>@item.namePricing</td>
+                                <td>@item.startTime</td>
+                                <td>@item.endTime</td>
+                                @{
+                                    int totalDays = (int)item.remainingTime.TotalDays;
+                                }
+                                <td>@totalDays days</td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="4">Không có gói cước nào!!!</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</section>
+
+<style>
+    .page-item a {
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+    }
+</style>

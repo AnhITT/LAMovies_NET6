@@ -30,7 +30,7 @@ namespace LAMovies_NET6.Repositories
         {
             try
             {
-                var data = this.GetById(id);
+                var data = _data.Genres.Find(id);
                 if (data == null)
                     return false;
                 _data.Genres.Remove(data);
@@ -66,6 +66,12 @@ namespace LAMovies_NET6.Repositories
         {
             return _data.Genres.ToList();
         }
+        public IQueryable<Genre> List()
+        {
+            var data = _data.Genres.AsQueryable();
+            return data;
+        }
+
         public ICollection<Movie> GetMoviesByGenres(int idGenres)
         {
             return _data.MovieGenres.Where(g => g.idGenre == idGenres).Select(m => m.Movie).ToList();

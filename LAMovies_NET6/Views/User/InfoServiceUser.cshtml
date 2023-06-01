@@ -1,0 +1,98 @@
+﻿@model IEnumerable<LAMovies_NET6.Models.DTO.UserPricingDTO>
+@{
+    ViewData["Title"] = "InfoServiceUser";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    DateTime? dateExpired = null;
+    var pricingExpired = ViewBag.CheckPricingExpired;
+    if (pricingExpired != null)
+    {
+        dateExpired = pricingExpired.endTime;
+    }
+    
+}
+
+<section class="m-profile setting-wrapper">
+    <div class="container">
+        <h4 class="main-title mb-4 text-center">Movie Service</h4>
+        <div class="row">
+            <div class="col-lg-4 mb-3">
+                <div class="sign-user_card text-center">
+                    <img src="~/image/user/user.jpg" class="rounded-circle img-fluid d-block mx-auto mb-3" alt="user">
+                    <h4 class="mb-3"></h4>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="sign-user_card">
+                    <h5 class="mb-3 pb-3 a-border">List Service Movie</h5>
+                    @if (Model != null && Model.Any())
+                    {
+                        @foreach (var item in Model)
+                        {
+                            <div class="row align-items-center justify-content-between mb-3">
+                                <div class="col-md-8">
+                                    <span class="text-light font-size-13">Name Service</span>
+                                    <p class="mb-0">@item.namePricing</p>
+                                </div>
+
+                            </div>
+                            <div class="row align-items-center justify-content-between mb-3">
+                                <div class="col-md-8">
+                                    <span class="text-light font-size-13">Price Service</span>
+                                    <p class="mb-0">@item.pricePricing $</p>
+                                </div>
+
+                            </div>
+                            <div class="row align-items-center justify-content-between mb-3">
+                                <div class="col-md-8">
+                                    <span class="text-light font-size-13">Time</span>
+                                    <p class="mb-0">@item.timePricing</p>
+                                </div>
+                            </div>
+
+                            <div class="row align-items-center justify-content-between mb-3">
+                                <div class="col-md-8">
+                                    <span class="text-light font-size-13">Registration Date</span>
+                                    <p class="mb-0">@item.startTime</p>
+                                </div>
+
+                            </div>
+                            <div class="row align-items-center justify-content-between mb-3">
+                                <div class="col-md-8">
+                                    <span class="text-light font-size-13">Expired Date</span>
+                                    <p class="mb-0">@item.endTime</p>
+                                </div>
+
+                            </div>
+                            <div class="row align-items-center justify-content-between mb-3">
+                                <div class="col-md-8">
+                                    <span class="text-light font-size-13">Time Remaining</span>
+                                    @{
+                                        int totalDays = (int)item.remainingTime.TotalDays;
+                                    }
+                                    <p class="mb-0">@totalDays days</p>
+                                </div>
+
+                            </div>
+                        }
+                    }
+                    else if (dateExpired != null)
+                    {
+                        <h4 class="main-title mb-4 text-center">Your service has expired on @dateExpired .Please renew your service.</h4>
+
+                    }
+                    else
+                    {
+                        <h4 class="main-title mb-4 text-center">You have not subscribed to any service.</h4>
+                    }
+                    <div class="d-flex justify-content-center">
+                        <a asp-action="Pricing" asp-controller="Pricing" class="btn btn-hover m-3">Subscribed Service</a>
+                        <a asp-action="Index" asp-controller="Home" class="btn btn-hover m-3">Back to home</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>

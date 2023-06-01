@@ -1,5 +1,8 @@
 ﻿@model LAMovies_NET6.Models.DTO.MovieListDTO
-
+@using LAMovies_NET6.Models
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
 @{
     ViewData["Title"] = "Home";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -62,13 +65,38 @@
 
             </div>
         </section>
-        <section id="iq-favorites" class="pt-5">
+        @if (SignInManager.IsSignedIn(User))
+        {
+            <section id="iq-suggestede" class="pt-5">
+                @Html.Partial("_PartialMovieHistory")
+            </section>
+        }
+        else
+        {
+            <section id="iq-upcoming-movie" class="pt-5">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-12 overflow-hidden">
+                            <div class="iq-main-header d-flex align-items-center justify-content-between">
+                                <h4 class="main-title">Suggest For You</h4>
+                            </div>
+                            <div class="upcoming-contens">
+                                <ul class="favorites-slider list-inline row p-0 mb-0">
+                                    @Html.Partial("_PartialSortDate")
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        }
+        
+        <section id="iq-favorites">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-sm-12 overflow-hidden">
                         <div class="iq-main-header d-flex align-items-center justify-content-between">
                             <h4 class="main-title">Top 5 Movies</h4>
-                            <a class="iq-view-all" href="movie-category.html">View All</a>
                         </div>
                         <div class="favorites-contens">
                             <ul class="favorites-slider list-inline row p-0 mb-0">
@@ -85,7 +113,6 @@
                     <div class="col-sm-12 overflow-hidden">
                         <div class="iq-main-header d-flex align-items-center justify-content-between">
                             <h4 class="main-title">New Movies</h4>
-                            <a class="iq-view-all" href="movie-category.html">View All</a>
                         </div>
                         <div class="upcoming-contens">
                             <ul class="favorites-slider list-inline row p-0 mb-0">
@@ -96,23 +123,7 @@
                 </div>
             </div>
         </section>
-        <section id="iq-suggestede">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-sm-12 overflow-hidden">
-                        <div class="iq-main-header d-flex align-items-center justify-content-between">
-                            <h4 class="main-title">Suggested For You</h4>
-                            <a class="iq-view-all" href="movie-category.html">View All</a>
-                        </div>
-                        <div class="suggestede-contens">
-                            <ul class="list-inline favorites-slider row p-0 mb-0">
-                                @Html.Partial("_PartialSortDate")
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+        
             @Html.Partial("_PartialTop1Movie")
         
     </div>

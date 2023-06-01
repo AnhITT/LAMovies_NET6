@@ -1,4 +1,4 @@
-using LAMovies_NET6.Data;
+﻿using LAMovies_NET6.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using LAMovies_NET6.Models;
@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using LAMovies_NET6.Interfaces;
 using LAMovies_NET6.Repositories;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Mvc.Razor;
+using Microsoft.AspNetCore.Authorization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -51,8 +54,5 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
-app.MapControllerRoute(
-    name: "Admin",
-    pattern: "{area=Admin}/{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
