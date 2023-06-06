@@ -28,6 +28,7 @@ namespace LAMovies_NET6.Repositories
                 _data.Movies.Add(model);
                 _data.SaveChanges();
                 AddMovieToGenre(model);
+                AddMovieToActor(model);
                 _data.SaveChanges();
                 return true;
             }
@@ -46,6 +47,18 @@ namespace LAMovies_NET6.Repositories
                     idGenre = genreId
                 };
                 _data.MovieGenres.Add(movieGenre);
+            }
+        }
+        public void AddMovieToActor(Movie model)
+        {
+            foreach (int actorId in model.Actor)
+            {
+                var movieActor = new MovieActor
+                {
+                    idMovie = model.idMovie,
+                    idActor = actorId
+                };
+                _data.MovieActors.Add(movieActor);
             }
         }
         public bool Delete(int id)
@@ -130,6 +143,16 @@ namespace LAMovies_NET6.Repositories
                               ).ToList();
                 movie.GenreNames = genres;
             }
+            foreach (var movie in list)
+            {
+                var genres = (from actor in _data.Actors
+                              join table in _data.MovieActors
+                              on actor.idActor equals table.idActor
+                              where table.idMovie == movie.idMovie
+                              select actor.nameActor
+                              ).ToList();
+                movie.ActorNames = genres;
+            }
         }
 
         public MovieListDTO List(string term = "", bool paging = false, int currentPage = 0)
@@ -159,7 +182,67 @@ namespace LAMovies_NET6.Repositories
             data.MovieList = list.AsQueryable();
             return data;
         }
-        
+        public MovieListDTO ListMoviesByCountry(string name, bool paging = false, int currentPage = 0)
+        {
+            var data = new MovieListDTO();
+
+            var list = _data.Movies.Where(m => m.subLanguageMovie == name).ToList();
+
+            if (paging)
+            {
+                int pageSize = 8;
+                int count = list.Count;
+                int TotalPages = (int)Math.Ceiling(count / (double)pageSize);
+                list = list.Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                data.pageSize = pageSize;
+                data.currentPage = currentPage;
+                data.totalPages = TotalPages;
+            }
+            data.MovieList = list.AsQueryable();
+            return data;
+        }
+
+        public MovieListDTO ListSeriesMovies(bool paging = false, int currentPage = 0)
+        {
+            var data = new MovieListDTO();
+
+            var list = _data.Movies.Where(m => m.typeMovie == "seriesMovies").ToList();
+
+            if (paging)
+            {
+                int pageSize = 8;
+                int count = list.Count;
+                int TotalPages = (int)Math.Ceiling(count / (double)pageSize);
+                list = list.Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                data.pageSize = pageSize;
+                data.currentPage = currentPage;
+                data.totalPages = TotalPages;
+            }
+            data.MovieList = list.AsQueryable();
+            return data;
+        }
+
+        public MovieListDTO ListOddMovies(bool paging = false, int currentPage = 0)
+        {
+            var data = new MovieListDTO();
+
+            var list = _data.Movies.Where(m => m.typeMovie == "oddMovies").ToList();
+
+            if (paging)
+            {
+                int pageSize = 8;
+                int count = list.Count;
+                int TotalPages = (int)Math.Ceiling(count / (double)pageSize);
+                list = list.Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                data.pageSize = pageSize;
+                data.currentPage = currentPage;
+                data.totalPages = TotalPages;
+            }
+            data.MovieList = list.AsQueryable();
+            return data;
+        }
+
+
         public Movie GetDetailMovie(int idMovie)
         {
             var movie = _data.Movies.Find(idMovie);
@@ -242,7 +325,30 @@ namespace LAMovies_NET6.Repositories
                 _data.SaveChanges();
             }
         }
-
+        public void SaveHistoryWatchedMovieSeries(int id, int tap)
+        {
+            var user = _httpContextAccessor.HttpContext.User;
+            var userId = user.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var checkIdMovie = _data.MovieHistorys.FirstOrDefault(m => m.idMovie == id && m.idUser == userId);
+            if (checkIdMovie == null)
+            {
+                MovieHistory movieHistory = new MovieHistory()
+                {
+                    idMovie = id,
+                    idUser = userId,
+                    episodes = tap,
+                    dateTimeWatch = DateTime.Now
+                };
+                _data.MovieHistorys.Add(movieHistory);
+                _data.SaveChanges();
+            }
+            else
+            {
+                checkIdMovie.episodes = tap;
+                checkIdMovie.dateTimeWatch = DateTime.Now;
+                _data.SaveChanges();
+            }
+        }
         public List<Movie> HistoryMovieByUser()
         {
             var user = _httpContextAccessor.HttpContext.User;
@@ -267,11 +373,95 @@ namespace LAMovies_NET6.Repositories
                     idMovie = item.idMovie,
                     nameMovie = item.nameMovie,
                     uriImg = item.uriImg,
+                    typeMovie = item.typeMovie,
+                    episodes = movieCheck.episodes,
                     remainingTime = DateTime.Now - movieCheck.dateTimeWatch
                 };
                 list.Add(movieHistory);
             }
             return list;
+        }
+        public bool AddOddMovie(OddMovie model)
+        {
+            try
+            {
+                _data.OddMovies.Add(model);
+                _data.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+        public OddMovie GetOddMovieById(int id)
+        {
+            return _data.OddMovies.FirstOrDefault(u => u.idMovie == id);
+        }
+        public bool UpdateOddMovie(OddMovie model)
+        {
+            try
+            {
+                _data.OddMovies.Update(model);
+                _data.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public List<SeriesMovie> GetSeriesById(int id)
+        {
+            return _data.SeriesMovies.Where(u => u.idMovie == id).ToList();
+        }
+
+        public bool AddSeriesMovie(SeriesMovie model)
+        {
+            try
+            {
+                _data.SeriesMovies.Add(model);
+                _data.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+        public OddMovie GetURLOddMovie(int id)
+        {
+            var item = _data.OddMovies.FirstOrDefault(m => m.idMovie == id);
+            return item;
+        }
+
+        public List<SeriesMovie> GetURLSeriesMovies(int id)
+        {
+            var item = _data.SeriesMovies.Where(m => m.idMovie == id).ToList();
+            return item;
+        }
+        public bool DeleteURLSeries(int id)
+        {
+            try
+            {
+                var data = _data.SeriesMovies.Find(id);
+                if (data == null)
+                    return false;
+                _data.SeriesMovies.Remove(data);
+                _data.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+        public Movie FindMovieByIdSeries(int idSeries)
+        {
+            var series = _data.SeriesMovies.FirstOrDefault(m => m.idSeries == idSeries);
+            var movie = _data.Movies.FirstOrDefault(m => m.idMovie == series.idMovie);
+            return movie;
         }
     }
 }

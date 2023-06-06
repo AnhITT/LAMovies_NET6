@@ -1,0 +1,73 @@
+﻿@model LAMovies_NET6.Models.Movie
+
+@{
+    var url = ViewBag.url;
+    var tap = ViewBag.tap;
+}
+@{
+    ViewData["Title"] = @Model.nameMovie + " Episode " + @tap;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@if (url != null)
+{
+    <div class="video-container iq-main-slider pt-5">
+        <div class="container-fluid pt-4">
+            <iframe src="@url" width="100%" height="100%" frameborder="0" allowfullscreen></iframe>
+        </div>
+    </div>
+}
+else
+{
+    <div class="video-container iq-main-slider pt-5">
+        <div class="container-fluid pt-4">
+            <h1 class="pt-5 text-center trending-text big-title text-uppercase mt-0">No movies yet, please wait for me to add more movies</h1>
+        </div>
+    </div>
+}
+<div class="main-content movie">
+    <section class="movie-detail container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="trending-info g-border">
+                    <h1 class="trending-text big-title text-uppercase mt-0">@Model.nameMovie - Episode @tap</h1>
+                    @Html.Partial("_PartialMoveEpisode")
+                    <div class="ganre-wrapper pt-3">
+                        Actor:
+                        @foreach (var actor in Model.ActorNames)
+                        {
+                            <a href="#">
+                                @actor
+                            </a>
+                        }
+
+                    </div>
+                    <div class="ganre-wrapper pt-3">
+                        Genres:
+                        @foreach (var genre in Model.GenreNames)
+                        {
+                            <a href="#" onclick="window.location.href='/Genre/ListMovieByGenres?name=@genre'">
+                                @genre
+                            </a>
+                        }
+
+                    </div>
+                    <div class="d-flex align-items-center text-white text-detail mt-4">
+                        <span class="badge badge-secondary p-3">@Model.minAgeMovie +</span>
+                        <span class="ml-3">@Model.timeMovie</span>
+                        <span class="trending-year">@Model.yearCreateMovie</span>
+                    </div>
+                    <h3>Description</h3>
+                    <p class="trending-dec w-100 mb-0">
+                        @Model.descriptionMovie
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="iq-favorites movie-detail" class="pt-5">
+        @Html.Partial("_PartialMovieHistory")
+    </section>
+</div>
+
+
+

@@ -7,7 +7,7 @@ namespace LAMovies_NET6.Models
         public int idMovie { get; set; }
         public string idUser { get; set; }
         public DateTime dateTimeWatch { get; set; }
-        public TimeSpan? remainingTime { get; set; }
+        public int? episodes { get; set; }
         public int? minutes { get; set; }
         public bool? status { get; set; }    
         public Movie Movie { get; set; }

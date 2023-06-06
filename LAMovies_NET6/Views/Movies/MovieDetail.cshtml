@@ -5,7 +5,7 @@
 @model LAMovies_NET6.Models.Movie
 
 @{
-    ViewData["Title"] = "MovieDetail";
+    ViewData["Title"] = Model.nameMovie;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -38,8 +38,18 @@
                 Genres:
                 @foreach (var genre in Model.GenreNames)
                 {
-                    <a href="#">
+                    <a href="#" onclick="window.location.href='/Genre/ListMovieByGenres?name=@genre'">
                         @genre
+                    </a>
+                }
+
+            </div>
+            <div class="ganre-wrapper">
+                Actor:
+                @foreach (var actor in Model.ActorNames)
+                {
+                    <a href="#">
+                        @actor
                     </a>
                 }
 
@@ -50,10 +60,20 @@
             <div class="d-flex align-items-center r-mb-23">
                 @if (SignInManager.IsSignedIn(User))
                 {
-                    <a href="/Movies/WatchMovie?movieId=@Model.idMovie" class="btn btn-danger iq-button">
-                        <i class="fa-solid fa-play"></i>
-                        Play Now
-                    </a>
+                    @if (String.Compare(Model.typeMovie, "oddMovies", StringComparison.Ordinal) == 0)
+                    {
+                        <a href="/Movies/WatchMovie?movieId=@Model.idMovie" class="btn btn-danger iq-button">
+                            <i class="fa-solid fa-play"></i>
+                            Play Now
+                        </a>
+                    }
+                    else
+                    {
+                        <a href="/Movies/WatchMovieSeries?movieId=@Model.idMovie&tap=1" class="btn btn-danger iq-button">
+                            <i class="fa-solid fa-play"></i>
+                            Play Now
+                        </a>
+                    }
                 }
                 else
                 {

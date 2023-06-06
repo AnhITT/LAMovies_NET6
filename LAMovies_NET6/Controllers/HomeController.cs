@@ -3,6 +3,7 @@ using LAMovies_NET6.Interfaces;
 using LAMovies_NET6.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System.Data;
 using System.Diagnostics;
 
@@ -12,25 +13,32 @@ namespace LAMovies_NET6.Controllers
     {
         private readonly IMoviesRepository _movie;
         private readonly IPricingRepository _pricing;
-        public HomeController(IMoviesRepository moviesRepository, IPricingRepository pricing)
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        public HomeController(IMoviesRepository moviesRepository, IPricingRepository pricing, IHttpContextAccessor httpContextAccessor)
         {
             _movie = moviesRepository;
             _pricing = pricing;
+            _httpContextAccessor = httpContextAccessor;
         }
         public IActionResult Index(string term = "", int currentPage = 1)
         {
             var movies = _movie.List(term, true, currentPage);
-            var movieHistory = _movie.HistoryMovieByUser();
-            if(movieHistory.Count == 0)
+            bool isAuthenticated = _httpContextAccessor.HttpContext.User.Identity.IsAuthenticated;
+
+            if (isAuthenticated)
             {
-                ViewBag.movieHistory = null;
+                var movieHistory = _movie.HistoryMovieByUser();
+                if (movieHistory.Count == 0)
+                {
+                    ViewBag.movieHistory = null;
+                }
+                else
+                {
+                    ViewBag.movieHistory = movieHistory;
+                }
+                var movieNotify = _movie.GetHistoryMovies(movieHistory);
+                HttpContext.Session.SetString("movieNotify", JsonConvert.SerializeObject(movieNotify));
             }
-            else
-            {
-                ViewBag.movieHistory = movieHistory;
-            }
-            var movieNotify = _movie.GetHistoryMovies(movieHistory);
-            TempData["movieNotify"] = movieNotify;
             ViewBag.listUpdate = _movie.ListMoviesUpdate();
             ViewBag.topViewMovie = _movie.GetTop5MovieView();
             ViewBag.sortMovie = _movie.SortDate();

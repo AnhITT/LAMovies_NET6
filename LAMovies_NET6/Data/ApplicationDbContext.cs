@@ -12,12 +12,17 @@ namespace LAMovies_NET6.Data
         }
         public DbSet<Movie>? Movies { get; set; }
         public DbSet<Genre>? Genres { get; set; }
+        public DbSet<Actor>? Actors { get; set; }
+        public DbSet<MovieActor>? MovieActors { get; set; }
 
         public DbSet<MovieGenre>? MovieGenres { get; set; }
         public DbSet<Pricing>? Pricings { get; set; }
 
         public DbSet<UserPricing>? UserPricings { get; set; }
         public DbSet<MovieHistory>? MovieHistorys { get; set; }
+        public DbSet<OddMovie>? OddMovies { get; set; }
+        public DbSet<SeriesMovie>? SeriesMovies { get; set; }
+
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -32,6 +37,17 @@ namespace LAMovies_NET6.Data
                     .HasOne(p => p.Genre)
                     .WithMany(pc => pc.MovieGenre)
                     .HasForeignKey(c => c.idGenre);
+
+            modelBuilder.Entity<MovieActor>()
+                    .HasKey(pc => new { pc.idMovie, pc.idActor });
+            modelBuilder.Entity<MovieActor>()
+                    .HasOne(p => p.Movie)
+                    .WithMany(pc => pc.MovieActors)
+                    .HasForeignKey(p => p.idMovie);
+            modelBuilder.Entity<MovieActor>()
+                    .HasOne(p => p.Actor)
+                    .WithMany(pc => pc.MovieActors)
+                    .HasForeignKey(c => c.idActor);
 
             modelBuilder.Entity<UserPricing>()
                     .HasKey(pc => new { pc.idUser, pc.idPricing });
@@ -62,6 +78,16 @@ namespace LAMovies_NET6.Data
         .HasKey(ur => new { ur.UserId, ur.RoleId });
             modelBuilder.Entity<IdentityUserToken<string>>()
         .HasKey(ut => new { ut.UserId, ut.LoginProvider, ut.Name });
+
+            modelBuilder.Entity<Movie>()
+            .HasOne(m => m.OddMovie)
+            .WithOne(u => u.Movie)
+            .HasForeignKey<OddMovie>(u => u.idMovie);
+
+            modelBuilder.Entity<SeriesMovie>()
+            .HasOne(u => u.Movie)
+            .WithMany(m => m.SeriesMovie)
+            .HasForeignKey(u => u.idMovie);
         }
     }
 }

@@ -80,14 +80,21 @@ namespace LAMovies_NET6.Controllers
             return View(listMovie);
         }
 
-        public IActionResult ListMovieByGenres(int id)
+        public IActionResult ListMovieByGenres(string name)
         {
-            var listMovie = _genreRepository.GetMoviesByGenres(id);
-            var genre = _genreRepository.GetById(id);
-            ViewBag.nameGenre = genre.nameGenre;
-            return View(listMovie);
+            var item = _genreRepository.GetGenreByName(name);
+            if(item != null)
+            {
+                var listMovie = _genreRepository.GetMoviesByGenres(item.idGenre);
+                ViewBag.nameGenre = item.nameGenre;
+                return View(listMovie);
+            }
+            return View("ListMovieByGenresNone");
         }
 
-
+        public IActionResult ListMovieByGenresNone(string name)
+        {
+            return View();
+        }
     }
 }

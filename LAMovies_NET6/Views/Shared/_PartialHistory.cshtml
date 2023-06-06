@@ -1,6 +1,9 @@
 ﻿@using LAMovies_NET6.Models.DTO
+@using Microsoft.AspNetCore.Http;
+@using Newtonsoft.Json;
 @{
-    var Movie = TempData["movieNotify"] as List<HistoryMoviesDTO>;
+    var context = ViewContext.HttpContext; // Lấy HttpContext từ ViewContext
+    var Movie = JsonConvert.DeserializeObject<List<HistoryMoviesDTO>>(context.Session.GetString("movieNotify"));
 }
 
 <li class="nav-item nav-icon">
@@ -15,38 +18,71 @@
     <div class="iq-sub-dropdown">
         <div class="iq-card shadow-none m-0">
             <div class="iq-card-body">
-                @if (Movie != null)
+                @if (Movie.Count != 0)
                 {
                     @foreach(var item in Movie)
                     {
-                                <a href="/Movies/WatchMovie?movieId=@item.idMovie" class="iq-sub-card">
-                            <div class="media align-items-center">
-                                <img src="@item.uriImg" class="img-fluid mr-3" width="64px" />
-                                <div class="media-body">
-                                    <h6 class="mb-0 ">@item.nameMovie</h6>
-                                    @{
-                                        TimeSpan remainingTime = item.remainingTime;
-                                        string formattedTime;
+                        @if (String.Compare(item.typeMovie, "oddMovies", StringComparison.Ordinal) == 0)
+                        {
+                            <a href="/Movies/WatchMovie?movieId=@item.idMovie" class="iq-sub-card">
+                                <div class="media align-items-center">
+                                    <img src="@item.uriImg" class="img-fluid mr-3" width="64px" />
+                                    <div class="media-body">
+                                        <h6 class="mb-0 ">@item.nameMovie</h6>
+                                        @{
+                                            TimeSpan remainingTime = item.remainingTime;
+                                            string formattedTime;
 
-                                        if (remainingTime.TotalHours < 1)
-                                        {
-                                            formattedTime = $"{remainingTime.Minutes} minutes ago";
+                                            if (remainingTime.TotalHours < 1)
+                                            {
+                                                formattedTime = $"{remainingTime.Minutes} minutes ago";
+                                            }
+                                            else if (remainingTime.TotalDays < 1)
+                                            {
+                                                formattedTime = $"{remainingTime.Hours} hours {remainingTime.Minutes} minutes ago";
+                                            }
+                                            else
+                                            {
+                                                formattedTime = $"{remainingTime.Days} days ago";
+                                            }
                                         }
-                                        else if (remainingTime.TotalDays < 1)
-                                        {
-                                            formattedTime = $"{remainingTime.Hours} hours {remainingTime.Minutes} minutes ago";
-                                        }
-                                        else
-                                        {
-                                            formattedTime = $"{remainingTime.Days} days ago";
-                                        }
-                                    }
-                                    <small class="font-size-12">@formattedTime </small>
+                                        <small class="font-size-12">@formattedTime </small>
+                                    </div>
                                 </div>
-                            </div>
-                        </a>
+                            </a>
+                        }
+                        else
+                        {
+                            <a href="/Movies/WatchMovieSeries?movieId=@item.idMovie&tap=@item.episodes" class="iq-sub-card">
+                                <div class="media align-items-center">
+                                    <img src="@item.uriImg" class="img-fluid mr-3" width="64px" />
+                                    <div class="media-body">
+                                        <h6 class="mb-0 ">@item.nameMovie</h6>
+                                        <small class="font-size-12">Enpisodes @item.episodes </small>
+                                        <br>
+                                        @{
+                                            TimeSpan remainingTime = item.remainingTime;
+                                            string formattedTime;
+
+                                            if (remainingTime.TotalHours < 1)
+                                            {
+                                                formattedTime = $"{remainingTime.Minutes} minutes ago";
+                                            }
+                                            else if (remainingTime.TotalDays < 1)
+                                            {
+                                                formattedTime = $"{remainingTime.Hours} hours {remainingTime.Minutes} minutes ago";
+                                            }
+                                            else
+                                            {
+                                                formattedTime = $"{remainingTime.Days} days ago";
+                                            }
+                                        }
+                                        <small class="font-size-12">@formattedTime </small>
+                                    </div>
+                                </div>
+                            </a>
+                        }
                     }
-                    
                 }
                 else
                 {

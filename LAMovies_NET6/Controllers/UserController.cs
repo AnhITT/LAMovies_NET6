@@ -1,5 +1,6 @@
 ﻿using LAMovies_NET6.Interfaces;
 using LAMovies_NET6.Models.DTO;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -68,6 +69,7 @@ namespace LAMovies_NET6.Controllers
         public async Task<IActionResult> Logout()
         {
             await this._userAuthRepository.LogoutAsync();
+            await HttpContext.SignOutAsync();
             return RedirectToAction(nameof(Login));
         }
 

@@ -21,8 +21,23 @@ namespace LAMovies_NET6.Interfaces
         Movie Top1Movie();
         List<Movie> MovieByGenre(int id);
         void SaveHistoryWatchedMovie(int id);
+        void SaveHistoryWatchedMovieSeries(int id, int tap);
         List<Movie> HistoryMovieByUser();
         List<HistoryMoviesDTO> GetHistoryMovies(List<Movie> movies);
+        bool AddOddMovie(OddMovie model);
+        bool AddSeriesMovie(SeriesMovie model);
+        OddMovie GetOddMovieById(int id);
+        bool UpdateOddMovie(OddMovie model);
+        List<SeriesMovie> GetSeriesById(int id);
+        MovieListDTO ListSeriesMovies(bool paging = false, int currentPage = 0);
+        MovieListDTO ListOddMovies(bool paging = false, int currentPage = 0);
+        OddMovie GetURLOddMovie(int id);
+        List<SeriesMovie> GetURLSeriesMovies(int id);
+
+        MovieListDTO ListMoviesByCountry(string name, bool paging = false, int currentPage = 0);
+
+        bool DeleteURLSeries(int id);
+        Movie FindMovieByIdSeries(int idSeries);
 
     }
 }

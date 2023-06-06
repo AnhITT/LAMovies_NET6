@@ -16,6 +16,22 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\Admin\source\repos\LAMovies_NET6\LAMovies_NET6
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/Admin/source/repos/LAMovies_NET6/LAMovies_NET6/Views/Actor/AddActor.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWN0b3JcQWRkQWN0b3IuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Admin/source/repos/LAMovies_NET6/LAMovies_NET6/Views/Actor/EditActor.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWN0b3JcRWRpdEFjdG9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Admin/source/repos/LAMovies_NET6/LAMovies_NET6/Views/Actor/ListMovieByActor.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWN0b3JcTGlzdE1vdmllQnlBY3Rvci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Admin/source/repos/LAMovies_NET6/LAMovies_NET6/Views/Actor/QLActor.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWN0b3JcUUxBY3Rvci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Admin/source/repos/LAMovies_NET6/LAMovies_NET6/Views/Genre/AddGenre.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2VucmVcQWRkR2VucmUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -26,6 +42,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/Admin/source/repos/LAMovies_NET6/LAMovies_NET6/Views/Genre/ListMovieByGenres.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2VucmVcTGlzdE1vdmllQnlHZW5yZXMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Admin/source/repos/LAMovies_NET6/LAMovies_NET6/Views/Genre/ListMovieByGenresNone.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2VucmVcTGlzdE1vdmllQnlHZW5yZXNOb25lLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Admin/source/repos/LAMovies_NET6/LAMovies_NET6/Views/Genre/QLGenres.cshtml]
@@ -48,12 +68,32 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW92aWVzXEFkZE1vdmllLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Admin/source/repos/LAMovies_NET6/LAMovies_NET6/Views/Movies/AddURLOddMovie.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW92aWVzXEFkZFVSTE9kZE1vdmllLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Admin/source/repos/LAMovies_NET6/LAMovies_NET6/Views/Movies/AddURLSeriesMovie.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW92aWVzXEFkZFVSTFNlcmllc01vdmllLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Admin/source/repos/LAMovies_NET6/LAMovies_NET6/Views/Movies/EditMovie.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW92aWVzXEVkaXRNb3ZpZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Admin/source/repos/LAMovies_NET6/LAMovies_NET6/Views/Movies/ListMovies.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW92aWVzXExpc3RNb3ZpZXMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Admin/source/repos/LAMovies_NET6/LAMovies_NET6/Views/Movies/ListMoviesByCountry.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW92aWVzXExpc3RNb3ZpZXNCeUNvdW50cnkuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Admin/source/repos/LAMovies_NET6/LAMovies_NET6/Views/Movies/ListOddMovies.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW92aWVzXExpc3RPZGRNb3ZpZXMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Admin/source/repos/LAMovies_NET6/LAMovies_NET6/Views/Movies/ListSeriesMovies.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW92aWVzXExpc3RTZXJpZXNNb3ZpZXMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Admin/source/repos/LAMovies_NET6/LAMovies_NET6/Views/Movies/MovieDetail.cshtml]
@@ -64,8 +104,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW92aWVzXFFMTW92aWVzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Admin/source/repos/LAMovies_NET6/LAMovies_NET6/Views/Movies/QLURLSeriesMovie.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW92aWVzXFFMVVJMU2VyaWVzTW92aWUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Admin/source/repos/LAMovies_NET6/LAMovies_NET6/Views/Movies/WatchMovie.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW92aWVzXFdhdGNoTW92aWUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Admin/source/repos/LAMovies_NET6/LAMovies_NET6/Views/Movies/WatchMovieSeries.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW92aWVzXFdhdGNoTW92aWVTZXJpZXMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Admin/source/repos/LAMovies_NET6/LAMovies_NET6/Views/Payment/CheckoutFail.cshtml]
@@ -118,6 +166,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/Admin/source/repos/LAMovies_NET6/LAMovies_NET6/Views/Shared/_PartialHistory.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9QYXJ0aWFsSGlzdG9yeS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Admin/source/repos/LAMovies_NET6/LAMovies_NET6/Views/Shared/_PartialMoveEpisode.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9QYXJ0aWFsTW92ZUVwaXNvZGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Admin/source/repos/LAMovies_NET6/LAMovies_NET6/Views/Shared/_PartialMovieHistory.cshtml]

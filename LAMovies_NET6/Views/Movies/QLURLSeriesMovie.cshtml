@@ -1,0 +1,73 @@
+﻿@model IEnumerable<LAMovies_NET6.Models.SeriesMovie>
+@{
+    var id = ViewBag.idMovie;
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item h5"><a asp-controller="Movies" asp-action="QLMovies"><i class="fa-solid fa-film"></i> Quản lý phim</a></li>
+        <li class="breadcrumb-item h5">Quản lý đường dẫn phim bộ</li>
+    </ol>
+</nav>
+<section style="padding-top: 30px" class="content">
+    <div class="card">
+        <div class="card-header">
+            <h2 class="text-center">Danh sách đường dẫn</h2>
+            <div class="card-tools">
+                <a asp-action="AddURLSeriesMovie" asp-route-id="@id" class="btn btn-success">Thêm tập</a>
+            </div>
+        </div>
+        <div class="card-body">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Đường dẫn</th>
+                        <th>Tập</th>
+                        <th>Số tập</th>
+                        <th></th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Count() != 0)
+                    {
+                        var i = 1;
+                        foreach (var item in Model)
+                        {
+
+                            <tr id="trow_@item.idSeries">
+                                <td>@i</td>
+                                <td>@item.urlMovie</td>
+                                <td>@item.practice</td>
+                                <td>@item.episodes</td>
+
+                                <td>
+                                    <a asp-controller="Genre" asp-action="ShowList" asp-route-id="@item.idSeries" class="btn btn-sm btn-success"><i class="fa-solid fa-list"></i></a>
+                                    <a asp-controller="Genre" asp-action="EditGenre" asp-route-id="@item.idSeries" class="btn btn-sm btn-primary"><i class="fa-solid fa-pen-to-square"></i></a>
+                                    <a href="/Movies/DeleteURLSeriesMovie?id=@item.idSeries" onclick="return window.confirm('Xác nhận xoá?')" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
+                                </td>
+                            </tr>
+                            i++;
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="4">Không có đường dẫn nào!!!</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</section>
+
+<style>
+    .page-item a {
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+    }
+</style>

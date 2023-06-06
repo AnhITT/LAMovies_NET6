@@ -2,17 +2,13 @@
 
 namespace LAMovies_NET6.Models
 {
-    public class SeriesMovies
+    public class OddMovie
     {
         [Key]
-        public int idSeries { get; set; }
-        [Required]
+        public int idOddMovie { get; set; }
         public int idMovie { get; set; }
         [Required]
-        public int episodes { get; set; }
-        [Required]
-        public int practice { get; set;}
-
+        public string urlMovie { get; set; }
         public Movie Movie { get; set; }
     }
 }

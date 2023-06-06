@@ -39,44 +39,44 @@
                                         <li class="menu-item">
                                             <a asp-controller="Movies" asp-action="ListMovies">movies</a>
                                             <ul class="sub-menu">
-                                                <li class="menu-item"><a href="#">series movies</a></li>
-                                                <li class="menu-item "><a href="#">odd movie</a></li>
+                                                <li class="menu-item"><a asp-controller="Movies" asp-action="ListSeriesMovies">series movies</a></li>
+                                                <li class="menu-item "><a asp-controller="Movies" asp-action="ListOddMovies">odd movie</a></li>
                                             </ul>
                                         </li>
                                         <li class="menu-item">
                                             <a asp-controller="Movies" asp-action="ListMovies">movies genreS</a>
                                             <ul class="sub-menu">
                                                 <li class="menu-item">
-                                                    <a href="#" onclick="window.location.href='/Genre/ListMovieByGenres?id=1'">
+                                                    <a href="#" onclick="window.location.href='/Genre/ListMovieByGenres?name=Action'">
                                                         Action
                                                     </a>
                                                 </li>
-                                                <li class="menu-item" onclick="window.location.href='/Genre/ListMovieByGenres?id=2'">
+                                                <li class="menu-item" onclick="window.location.href='/Genre/ListMovieByGenres?name=Humorous'">
                                                     <a href="#">
                                                         Humorous
                                                     </a>
                                                 </li>
-                                                <li class="menu-item " onclick="window.location.href='/Genre/ListMovieByGenres?id=3'">
+                                                <li class="menu-item " onclick="window.location.href='/Genre/ListMovieByGenres?name=Horrified'">
                                                     <a href="#">
                                                         Horrified
                                                     </a>
                                                 </li>
-                                                <li class="menu-item " onclick="window.location.href='/Genre/ListMovieByGenres?id=4'">
+                                                <li class="menu-item " onclick="window.location.href='/Genre/ListMovieByGenres?name=War'">
                                                     <a href="#">
                                                         War
                                                     </a>
                                                 </li>
-                                                <li class="menu-item " onclick="window.location.href='/Genre/ListMovieByGenres?id=5'">
+                                                <li class="menu-item " onclick="window.location.href='/Genre/ListMovieByGenres?name=Mentality'">
                                                     <a href="#">
                                                         Mentality
                                                     </a>
                                                 </li>
-                                                <li class="menu-item " onclick="window.location.href='/Genre/ListMovieByGenres?id=6'">
+                                                <li class="menu-item " onclick="window.location.href='/Genre/ListMovieByGenres?name=Cartoon'">
                                                     <a href="#">
                                                         Cartoon
                                                     </a>
                                                 </li>
-                                                <li class="menu-item " onclick="window.location.href='/Genre/ListMovieByGenres?id=7'">
+                                                <li class="menu-item " onclick="window.location.href='/Genre/ListMovieByGenres?name=Fiction'">
                                                     <a href="#">
                                                         Fiction
                                                     </a>
@@ -84,39 +84,39 @@
                                             </ul>
                                         </li>
                                         <li class="menu-item">
-                                            <a href="show-category.html">COUNTRY</a>
+                                            <a asp-controller="Movies" asp-action="ListMovies">COUNTRY</a>
                                             <ul class="sub-menu">
-                                                <li class="menu-item">
+                                                <li class="menu-item" onclick="window.location.href='/Movies/ListMoviesByCountry?name=VietNam'">
                                                     <a href="#">
                                                         VietNam
                                                     </a>
                                                 </li>
-                                                <li class="menu-item ">
+                                                <li class="menu-item " onclick="window.location.href='/Movies/ListMoviesByCountry?name=America'">
                                                     <a href="#">
                                                         America
                                                     </a>
                                                 </li>
-                                                <li class="menu-item ">
+                                                <li class="menu-item " onclick="window.location.href='/Movies/ListMoviesByCountry?name=Korea'">
                                                     <a href="#">
                                                         Korea
                                                     </a>
                                                 </li>
-                                                <li class="menu-item ">
+                                                <li class="menu-item " onclick="window.location.href='/Movies/ListMoviesByCountry?name=China'">
                                                     <a href="#">
                                                         China
                                                     </a>
                                                 </li>
-                                                <li class="menu-item ">
+                                                <li class="menu-item " onclick="window.location.href='/Movies/ListMoviesByCountry?name=Japan'">
                                                     <a href="#">
                                                         Japan
                                                     </a>
                                                 </li>
-                                                <li class="menu-item ">
+                                                <li class="menu-item " onclick="window.location.href='/Movies/ListMoviesByCountry?name=India'">
                                                     <a href="#">
                                                         India
                                                     </a>
                                                 </li>
-                                                <li class="menu-item ">
+                                                <li class="menu-item " onclick="window.location.href='/Movies/ListMoviesByCountry?name=England'">
                                                     <a href="#">
                                                         England
                                                     </a>
@@ -152,7 +152,6 @@
                                                     </form>
                                                 </div>
                                             </li>
-                                            @Html.Partial("_PartialHistory")
                                             @Html.Partial("_LoginPartial")
                                         </ul>
                                     </div>
@@ -176,7 +175,6 @@
                                             </form>
                                         </div>
                                     </li>
-                                        @Html.Partial("_PartialHistory")
                                     @Html.Partial("_LoginPartial")
                                 </ul>
                             </div>

@@ -11,5 +11,6 @@ namespace LAMovies_NET6.Interfaces
         List<Genre> GetGenresList();
         ICollection<Movie> GetMoviesByGenres(int idGenres);
         IQueryable<Genre> List();
+        Genre GetGenreByName(string name);
     }
 }

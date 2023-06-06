@@ -1,0 +1,9 @@
+﻿@using LAMovies_NET6.Models
+
+@{
+    var Movie = TempData["movieLink"] as List<SeriesMovie>;
+}
+@foreach (var item in Movie)
+{
+    <a href="/Movies/WatchMovieSeries?movieId=@item.idMovie&tap=@item.practice" class="active btn btn-outline-danger m-2">Episode @item.practice</a>
+}

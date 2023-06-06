@@ -42,6 +42,14 @@
                                 <td>@item.yearCreateMovie</td>
                                 <td>@item.viewMovie</td>
                                 <td>
+                                    @if (String.Compare(item.typeMovie, "oddMovies", StringComparison.Ordinal) == 0)
+                                    {
+                                        <a asp-controller="Movies" asp-action="AddURLOddMovie" asp-route-id="@item.idMovie" class="btn btn-sm btn-primary">URL Phim lẻ</a>
+                                    }
+                                    else
+                                    {
+                                        <a asp-controller="Movies" asp-action="QLURLSeriesMovie" asp-route-id="@item.idMovie" class="btn btn-sm btn-primary">URL Phim bộ</a>
+                                    }
                                     <a asp-controller="Movies" asp-action="EditMovie" asp-route-id="@item.idMovie" class="btn btn-sm btn-primary"><i class="fa-solid fa-pen-to-square"></i></a>
                                     <a href="/Movies/DeleteMovie?id=@item.idMovie" onclick="return window.confirm('Xác nhận xoá?')" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
 

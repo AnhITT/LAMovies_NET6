@@ -76,5 +76,9 @@ namespace LAMovies_NET6.Repositories
         {
             return _data.MovieGenres.Where(g => g.idGenre == idGenres).Select(m => m.Movie).ToList();
         }
+        public Genre GetGenreByName(string name)
+        {
+            return _data.Genres.FirstOrDefault(m => m.nameGenre == name);
+        }
     }
 }

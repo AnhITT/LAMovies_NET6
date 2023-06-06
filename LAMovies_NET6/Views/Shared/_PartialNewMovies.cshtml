@@ -32,11 +32,19 @@
                                 <div class="trending-list">
                                     <div class="text-primary title genres">
                                         Genres: <span class="text-body">
-                                            @foreach (var genre in item.GenreNames)
-                                            {
-                                                <a href="#">
-                                                    @genre
-                                                </a>
+                                            @{
+                                                var genreNames = item.GenreNames;
+                                                for (int i = 0; i < genreNames.Count; i++)
+                                                {
+                                                    var actor = genreNames[i];
+                                                    <a href="#" onclick="window.location.href='/Genre/ListMovieByGenres?name=@actor'">
+                                                        @actor 
+                                                    </a>
+                                                    if (i < genreNames.Count - 1)
+                                                    {
+                                                        <text>,</text>
+                                                    }
+                                                }
                                             }
                                         </span>
                                     </div>
@@ -47,7 +55,20 @@
                                     </div>
                                     <div class="text-primary title tag">
                                         Actor: <span class="text-body">
-                                            Robert Downey Jr., Chris Evans, Mark Ruffalo,...
+                                            @{
+                                                var actorNames = item.ActorNames;
+                                                for (int i = 0; i < actorNames.Count; i++)
+                                                {
+                                                    var actor = actorNames[i];
+                                                    <a href="#" onclick="window.location.href='/Actor/ListMovieByActor?name=@actor'">
+                                                        @actor 
+                                                    </a>
+                                                    if (i < actorNames.Count - 1)
+                                                    {
+                                                        <text>,</text>
+                                                    }
+                                                }
+                                            }
                                         </span>
                                     </div>
                                 </div>

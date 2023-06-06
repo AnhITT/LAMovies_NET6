@@ -31,6 +31,8 @@ namespace LAMovies_NET6.Models
         public string timeMovie { get; set; }
         [Required]
         public string yearCreateMovie { get; set; }
+        [Required]
+        public string typeMovie { get; set; }
         public int viewMovie { get; set; }
         public ICollection<MovieGenre> MovieGenre { get; set; }
         [NotMapped]
@@ -42,8 +44,20 @@ namespace LAMovies_NET6.Models
         public List<string>? GenreNames { get; set; }
         [NotMapped]
         public MultiSelectList? MultiGenreList { get; set; }
+       
         public ICollection<MovieHistory> MovieHistory { get; set; }
 
-
+        public OddMovie OddMovie { get; set; }
+        public ICollection<SeriesMovie> SeriesMovie { get; set; }
+        public ICollection<MovieActor> MovieActors { get; set; }
+        [NotMapped]
+        [Required]
+        public List<int>? Actor { get; set; }
+        [NotMapped]
+        public IEnumerable<SelectListItem>? ActorList { get; set; }
+        [NotMapped]
+        public List<string>? ActorNames { get; set; }
+        [NotMapped]
+        public MultiSelectList? MultiActorList { get; set; }
     }
 }

@@ -120,6 +120,16 @@
                                     </div>
                                 </div>
                                 <div class="pt-1">
+                                    Thể loại phim
+                                    <select asp-for="typeMovie" class="form-select form-select">
+                                        <option selected>--Chọn loại phim--</option>
+                                        <option value="seriesMovies">Phim bộ</option>
+                                        <option value="oddMovies">Phim lẻ</option>
+                                    </select>
+                                    <span class="text-danger" asp-validation-for="yearCreateMovie"> </span>
+
+                                </div>
+                                <div class="pt-1">
                                     Nhập chất lượng phim
                                     <select asp-for="qualityMovie" class="form-select form-select">
                                         <option selected>--Nhập chất lượng phim--</option>
@@ -133,12 +143,23 @@
                                 </div>
                                 <div>
 
-                                    <label asp-for="Genres" class="pt-1">Genre</label>
+                                    <label asp-for="Genres" class="pt-1">Thể loại</label>
                                     <div class="input-container">
                                         <select asp-items="Model.MultiGenreList" class="input form-select" asp-for="Genres" multiple>
                                             <option value="">--Lựa chọn thể loại--</option>
                                         </select>
                                         <span class="text-danger" asp-validation-for="Genres"> </span>
+
+                                    </div>
+                                </div>
+                                <div>
+
+                                    <label asp-for="Actor" class="pt-1">Diễn viên</label>
+                                    <div class="input-container">
+                                        <select asp-items="Model.MultiGenreList" class="input form-select" asp-for="Actor" multiple>
+                                            <option value="">--Lựa chọn diễn viên-</option>
+                                        </select>
+                                        <span class="text-danger" asp-validation-for="Actor"> </span>
 
                                     </div>
                                 </div>
