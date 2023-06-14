@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<LAMovies_NET6.Models.User>
 @{
+    ViewData["Title"] = "Quản lý tài khoản";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
@@ -31,8 +32,8 @@
                                 <td>@item.Email</td>
                                 <td>@item.dateBirthdayUser</td>
                                 <td>
-                                    <a asp-controller="Movies" asp-action="EditMovie" asp-route-id="@item.Id" class="btn btn-sm btn-primary"><i class="fa-solid fa-pen-to-square"></i></a>
-                                    <a href="/Movies/DeleteMovie?id=@item.Id" onclick="return window.confirm('Xác nhận xoá?')" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
+                                    <a asp-controller="User" asp-action="EditAccount" asp-route-id="@item.Id" class="btn btn-sm btn-primary"><i class="fa-solid fa-pen-to-square"></i></a>
+                                    <a href="/User/DeleteAccount?id=@item.Id" onclick="return window.confirm('Xác nhận xoá?')" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
 
                                 </td>
                             </tr>

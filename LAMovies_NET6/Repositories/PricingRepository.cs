@@ -24,6 +24,55 @@ namespace LAMovies_NET6.Repositories
             var data = _data.Pricings.AsQueryable();
             return data;
         }
+        public bool Add(Pricing model)
+        {
+            try
+            {
+                _data.Pricings.Add(model);
+                _data.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+        public bool Delete(int id)
+        {
+            try
+            {
+                var data = _data.Pricings.Find(id);
+                if (data == null)
+                    return false;
+                _data.Pricings.Remove(data);
+                _data.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public Pricing GetById(int id)
+        {
+            return _data.Pricings.Find(id);
+        }
+
+
+        public bool Update(Pricing model)
+        {
+            try
+            {
+                _data.Pricings.Update(model);
+                _data.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
         public async Task<Pricing> GetPricingById(int id)
         {
             var pricing = await _data.Pricings.FindAsync(id);
@@ -91,6 +140,10 @@ namespace LAMovies_NET6.Repositories
             var data = _data.UserPricings.ToList();
             return data;
         }
-
+        public UserPricing Top1UserPricing()
+        {
+            var data = _data.UserPricings.ToList();
+            return data.OrderByDescending(u => u.totalAmount).FirstOrDefault();
+        }
     }
 }

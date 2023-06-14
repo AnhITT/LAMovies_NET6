@@ -1,13 +1,14 @@
 ﻿@model IEnumerable<LAMovies_NET6.Models.Actor>
 
 @{
+    ViewData["Title"] = "Danh sách diễn viên";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
 <section style="padding-top: 30px" class="content">
     <div class="card">
         <div class="card-header">
-            <h2 class="text-center">Danh sách thể loại</h2>
+            <h2 class="text-center">Danh sách diễn viên</h2>
             <div class="card-tools">
                 <a asp-controller="Actor" asp-action="AddActor" class="btn btn-success">Thêm mới</a>
             </div>
@@ -34,7 +35,7 @@
                                     <img style="width:100px; height: 100px" src="@item.avartaActor" />
                                 </td>
                                 <td>
-                                    <a asp-controller="Genre" asp-action="ShowList" asp-route-id="@item.idActor" class="btn btn-sm btn-success"><i class="fa-solid fa-list"></i></a>
+                                    <a asp-controller="Actor" asp-action="ShowListActor" asp-route-id="@item.idActor" class="btn btn-sm btn-success"><i class="fa-solid fa-list"></i></a>
                                     <a asp-controller="Actor" asp-action="EditActor" asp-route-id="@item.idActor" class="btn btn-sm btn-primary"><i class="fa-solid fa-pen-to-square"></i></a>
                                     <a href="/Actor/DeleteActor?id=@item.idActor" onclick="return window.confirm('Xác nhận xoá?')" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
                                 </td>

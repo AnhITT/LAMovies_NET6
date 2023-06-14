@@ -6,6 +6,7 @@
         public int idPricing { get; set; }
         public DateTime startTime { get; set; }
         public DateTime endTime { get; set; }
+        public double totalAmount { get; set; }
         public Pricing Pricing { get; set; }
         public User User { get; set; }
     }

@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<LAMovies_NET6.Models.SeriesMovie>
 @{
     var id = ViewBag.idMovie;
+    ViewData["Title"] = "Quản lý URL phim bộ";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 <nav aria-label="breadcrumb">
@@ -40,10 +41,8 @@
                                 <td>@i</td>
                                 <td>@item.urlMovie</td>
                                 <td>@item.practice</td>
-                                <td>@item.episodes</td>
 
                                 <td>
-                                    <a asp-controller="Genre" asp-action="ShowList" asp-route-id="@item.idSeries" class="btn btn-sm btn-success"><i class="fa-solid fa-list"></i></a>
                                     <a asp-controller="Genre" asp-action="EditGenre" asp-route-id="@item.idSeries" class="btn btn-sm btn-primary"><i class="fa-solid fa-pen-to-square"></i></a>
                                     <a href="/Movies/DeleteURLSeriesMovie?id=@item.idSeries" onclick="return window.confirm('Xác nhận xoá?')" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
                                 </td>

@@ -1,10 +1,12 @@
-﻿using LAMovies_NET6.Data;
+﻿using Azure;
+using LAMovies_NET6.Data;
 using LAMovies_NET6.Interfaces;
 using LAMovies_NET6.Models;
 using LAMovies_NET6.Models.DTO;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Identity.Client;
 using System.Security.Claims;
+using System.Xml.Linq;
 
 namespace LAMovies_NET6.Repositories
 {
@@ -156,6 +158,101 @@ namespace LAMovies_NET6.Repositories
         {
             var user = await userManager.FindByIdAsync(id);
             return user;
+        }
+        public async Task<bool> Update(User user)
+        {
+            try
+            {
+                var userCheck = await userManager.FindByIdAsync(user.Id);
+                if (userCheck == null)
+                {
+                    return false;
+                }
+                else if (userCheck.fullName != user.fullName || userCheck.Email != user.Email ||
+                        userCheck.dateBirthdayUser != user.dateBirthdayUser)
+                {
+                    userCheck.fullName = user.fullName;
+                    userCheck.Email = user.Email;
+                    userCheck.dateBirthdayUser = user.dateBirthdayUser;
+                    var result = await userManager.UpdateAsync(userCheck);
+                    if (result.Succeeded)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    return true;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+        public async Task<Respone> UpdatePassword(CheckPasswordDTO checkPasswordDTO)
+        {
+            try
+            {
+                var respone = new Respone();
+                var userCheck = await userManager.FindByIdAsync(checkPasswordDTO.id);
+                if (userCheck == null)
+                {
+                    respone.statusCode = 0;
+                    respone.message = "Not Empty User";
+                    return respone;
+                }
+                else if (!await userManager.CheckPasswordAsync(userCheck, checkPasswordDTO.password))
+                {
+                    respone.statusCode = 0;
+                    respone.message = "Invalid Password";
+                    return respone;
+                }
+                else if(checkPasswordDTO.newPassword != checkPasswordDTO.repeatPassword)
+                {
+                    respone.statusCode = 0;
+                    respone.message = "Invalid The Same Password";
+                    return respone;
+                }
+                var result = await userManager.ChangePasswordAsync(userCheck, checkPasswordDTO.password, checkPasswordDTO.newPassword);
+                if (result.Succeeded)
+                {
+                    respone.statusCode = 1;
+                    respone.message = "Success Change Password";
+                    return respone;
+                }
+                else
+                {
+                    respone.statusCode = 0;
+                    respone.message = "Invalid Save Password";
+                    return respone;
+                }
+            }
+            catch (Exception ex)
+            {
+                var respone = new Respone();
+                respone.statusCode = 0;
+                respone.message = "Exception";
+                return respone;
+            }
+        }
+        public async Task<bool> DeleteAccount(string id)
+        {
+            var user = await userManager.FindByIdAsync(id);
+            if(user == null)
+            {
+                return false;
+            }
+            else
+            {
+                var result = await userManager.DeleteAsync(user);
+                return result.Succeeded;
+            }
         }
     }
 }

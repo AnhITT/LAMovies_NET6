@@ -2,8 +2,31 @@
 
 @{
     var Movie = TempData["movieLink"] as List<SeriesMovie>;
+    var tap = ViewBag.totalTap;
+    int i = 0;
 }
+
 @foreach (var item in Movie)
 {
+    i++;
     <a href="/Movies/WatchMovieSeries?movieId=@item.idMovie&tap=@item.practice" class="active btn btn-outline-danger m-2">Episode @item.practice</a>
 }
+@if(i == tap)
+{
+    <div class="ganre-wrapper pt-3">
+        Episode:
+        <a href="#">
+            Full @i/@tap
+        </a>
+    </div>
+}
+else
+{
+    <div class="ganre-wrapper pt-3">
+        Episode:
+        <a href="#">
+            Update @i/@tap
+        </a>
+    </div>
+}
+

@@ -1,5 +1,6 @@
 ﻿using LAMovies_NET6.Models;
 using LAMovies_NET6.Models.DTO;
+using System.Xml.Linq;
 
 namespace LAMovies_NET6.Interfaces
 {
@@ -12,6 +13,7 @@ namespace LAMovies_NET6.Interfaces
         bool Delete(int id);
         MovieListDTO List(string term = "", bool paging = false, int currentPage = 0);
         List<int> GetGenreByMovieId(int movieId);
+        List<int> GetActorByMovieId(int movieId);
         Movie GetDetailMovie(int idMovie);
         Movie WatchMovie(int idMovie);
         void UpdateView(Movie movie);
@@ -38,6 +40,8 @@ namespace LAMovies_NET6.Interfaces
 
         bool DeleteURLSeries(int id);
         Movie FindMovieByIdSeries(int idSeries);
-
+        int CountMovie();
+        int CountMovieOdd();
+        int CountMovieSeries();
     }
 }

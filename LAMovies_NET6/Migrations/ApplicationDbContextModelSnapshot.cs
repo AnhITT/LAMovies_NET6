@@ -76,6 +76,9 @@ namespace LAMovies_NET6.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("episodes")
+                        .HasColumnType("int");
+
                     b.Property<int>("minAgeMovie")
                         .HasColumnType("int");
 
@@ -104,10 +107,6 @@ namespace LAMovies_NET6.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("uriImgCover")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("uriMovie")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -241,9 +240,6 @@ namespace LAMovies_NET6.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("idSeries"));
 
-                    b.Property<int>("episodes")
-                        .HasColumnType("int");
-
                     b.Property<int>("idMovie")
                         .HasColumnType("int");
 
@@ -333,6 +329,9 @@ namespace LAMovies_NET6.Migrations
 
                     b.Property<DateTime>("startTime")
                         .HasColumnType("datetime2");
+
+                    b.Property<double>("totalAmount")
+                        .HasColumnType("float");
 
                     b.HasKey("idUser", "idPricing");
 

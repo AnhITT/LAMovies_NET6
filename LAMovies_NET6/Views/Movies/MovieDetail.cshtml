@@ -48,7 +48,7 @@
                 Actor:
                 @foreach (var actor in Model.ActorNames)
                 {
-                    <a href="#">
+                    <a href="#" onclick="window.location.href='/Actor/ListMovieByActor?name=@actor'">
                         @actor
                     </a>
                 }

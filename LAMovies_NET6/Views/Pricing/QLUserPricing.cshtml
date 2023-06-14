@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<LAMovies_NET6.Models.DTO.ListUserPricingDTO>
 @{
+    ViewData["Title"] = "Quản lý người sử dụng dịch vụ";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
@@ -36,7 +37,14 @@
                                 @{
                                     int totalDays = (int)item.remainingTime.TotalDays;
                                 }
-                                <td>@totalDays days</td>
+                                @if(totalDays <= 0)
+                                {
+                                    <td class="text-danger">Expired</td>
+                                }
+                                else
+                                {
+                                    <td>@totalDays days</td>
+                                }
                             </tr>
                         }
                     }

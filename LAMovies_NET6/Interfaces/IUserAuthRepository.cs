@@ -11,5 +11,8 @@ namespace LAMovies_NET6.Interfaces
         Task<User> GetInfoAccount();
         List<User> GetAllAccount();
         Task<User> GetAccountById(string id);
+        Task<bool> Update(User user);
+        Task<Respone> UpdatePassword(CheckPasswordDTO checkPasswordDTO);
+        Task<bool> DeleteAccount(string id);
     }
 }

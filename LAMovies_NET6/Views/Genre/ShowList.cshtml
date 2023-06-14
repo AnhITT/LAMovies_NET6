@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<LAMovies_NET6.Models.Movie>
-
-@{
-    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
-}
 @{
     var genre = ViewBag.nameGenre;
+}
+@{
+    ViewData["Title"] = "Danh sách phim";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">

@@ -35,6 +35,14 @@ namespace LAMovies_NET6.Controllers
         }
         public IActionResult ListMovies(string term = "", int currentPage = 1)
         {
+            if(term == "")
+            {
+                ViewBag.search = null;
+            }
+            else
+            {
+                ViewBag.search = term;
+            }
             var movies = _movie.List(term, true, currentPage);
             return View(movies);
         }
@@ -84,6 +92,7 @@ namespace LAMovies_NET6.Controllers
                     var movieLink = url.FirstOrDefault(m => m.practice == tap);
                     ViewBag.url = movieLink.urlMovie;
                     ViewBag.tap = movieLink.practice;
+                    ViewBag.totalTap = _movie.GetById(movieId).episodes;
                     TempData["movieLink"] = url;
                 }
                 else
@@ -127,6 +136,7 @@ namespace LAMovies_NET6.Controllers
         [Authorize(Roles = "admin")]
         public IActionResult QLMovies(string term = "", int currentPage = 1)
         {
+            ViewData["Title"] = "Quản lý phim";
             var movies = _movie.List(term, true, currentPage);
             return View(movies);
         }
@@ -136,6 +146,7 @@ namespace LAMovies_NET6.Controllers
         [HttpGet]
         public IActionResult AddMovie()
         {
+            ViewData["Title"] = "Thêm mới phim";
             var model = new Movie();
             model.GenreList = _genreRepository.List().Select(a => new SelectListItem { Text = a.nameGenre, Value = a.idGenre.ToString() });
             model.ActorList = _actorRepository.List().Select(a => new SelectListItem { Text = a.nameActor, Value = a.idActor.ToString() });
@@ -163,9 +174,15 @@ namespace LAMovies_NET6.Controllers
         [Authorize(Roles = "admin")]
         public IActionResult EditMovie(int id)
         {
+            ViewData["Title"] = "Chỉnh sửa phim";
             var model = _movie.GetById(id);
             var selectedGenres = _movie.GetGenreByMovieId(model.idMovie);
+            var selectedActor = _movie.GetActorByMovieId(model.idMovie);
+
             MultiSelectList multiGenreList = new MultiSelectList(_genreRepository.List(), "idGenre", "nameGenre", selectedGenres);
+            MultiSelectList multiActorList = new MultiSelectList(_actorRepository.List(), "idActor", "nameActor", selectedActor);
+
+            model.MultiActorList = multiActorList;
             model.MultiGenreList = multiGenreList;
             return View(model);
         }
@@ -175,7 +192,12 @@ namespace LAMovies_NET6.Controllers
         public IActionResult EditMovie(Movie model)
         {
             var selectedGenres = _movie.GetGenreByMovieId(model.idMovie);
+            var selectedActor = _movie.GetActorByMovieId(model.idMovie);
+
             MultiSelectList multiGenreList = new MultiSelectList(_genreRepository.List(), "idGenre", "nameGenre", selectedGenres);
+            MultiSelectList multiActorList = new MultiSelectList(_actorRepository.List(), "idActor", "nameActor", selectedActor);
+
+            model.MultiActorList = multiActorList;
             model.MultiGenreList = multiGenreList;
             var result = _movie.Update(model);
             if (result)

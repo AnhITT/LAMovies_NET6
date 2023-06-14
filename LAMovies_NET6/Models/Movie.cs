@@ -13,8 +13,6 @@ namespace LAMovies_NET6.Models
         [Required]
         public string? descriptionMovie { get; set; }
         [Required]
-        public string uriMovie { get; set; }
-        [Required]
         public string uriMovieTrailer { get; set; }
         [Required]
         public string uriImg { get; set; }
@@ -34,6 +32,10 @@ namespace LAMovies_NET6.Models
         [Required]
         public string typeMovie { get; set; }
         public int viewMovie { get; set; }
+
+        [Required]
+        public int episodes { get; set; }
+
         public ICollection<MovieGenre> MovieGenre { get; set; }
         [NotMapped]
         [Required]

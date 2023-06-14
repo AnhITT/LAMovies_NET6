@@ -32,6 +32,7 @@ namespace LAMovies_NET6.Repositories
                     idUser = userId,
                     startTime = DateTime.Now,
                     endTime = DateTime.Now.AddMonths(pricing.timePricing),
+                    totalAmount = pricing.pricePricing
                 };
                 _data.Add(userPricing);
                 _data.SaveChanges();
@@ -47,6 +48,7 @@ namespace LAMovies_NET6.Repositories
                         idUser = userId,
                         startTime = DateTime.Now,
                         endTime = DateTime.Now.AddMonths(pricing.timePricing),
+                        totalAmount = checkUserPricing.totalAmount + pricing.pricePricing 
                     };
                     _data.Remove(checkUserPricing);
                     _data.Add(updateUserPricing);
@@ -61,6 +63,7 @@ namespace LAMovies_NET6.Repositories
                         idUser = userId,
                         endTime = checkUserPricing.endTime.AddMonths(pricing.timePricing),
                         startTime = checkUserPricing.startTime,
+                        totalAmount = checkUserPricing.totalAmount + pricing.pricePricing
                     };
                     if (id > checkUserPricing.idPricing)
                     {

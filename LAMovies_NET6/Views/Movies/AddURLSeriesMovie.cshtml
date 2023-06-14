@@ -1,5 +1,6 @@
 ﻿@model LAMovies_NET6.Models.SeriesMovie
 @{
+    ViewData["Title"] = "Thêm URL phim bộ";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
@@ -41,13 +42,7 @@
                                         <span class="text-danger" asp-validation-for="practice"> </span>
                                     </div>
                                 </div>
-                                <div>
-                                    Nhập số tập
-                                    <div>
-                                        <input type="text" class="form-control" asp-for="episodes">
-                                        <span class="text-danger" asp-validation-for="episodes"> </span>
-                                    </div>
-                                </div>
+                                
                                     @if (TempData["msg"] != null)
                                     {
                                         <div class="alert text-danger">

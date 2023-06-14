@@ -123,10 +123,38 @@ namespace LAMovies_NET6.Controllers
             return View();
         }
 
-        public IActionResult CheckoutSuccess(int idPricing)
+        public async Task<IActionResult> CheckoutSuccess(string paymentId, string token, string payerId, int idPricing)
         {
-            _paymentRepository.SaveDataService(idPricing);
-            return View();
+            var environment = new SandboxEnvironment(_clientId, _secretKey);
+            var client = new PayPalHttpClient(environment);
+
+            var executePayment = new PaymentExecution()
+            {
+                PayerId = payerId
+            };
+
+            try
+            {
+                var request = new PaymentExecuteRequest(paymentId);
+                request.RequestBody(executePayment);
+
+                var response = await client.Execute(request);
+                var statusCode = response.StatusCode;
+                Payment result = response.Result<Payment>();
+
+                // Process the successful payment and save the transaction details
+                _paymentRepository.SaveDataService(idPricing);
+
+                return View();
+            }
+            catch (HttpException httpException)
+            {
+                var statusCode = httpException.StatusCode;
+                var debugId = httpException.Headers.GetValues("PayPal-Debug-Id").FirstOrDefault();
+
+                // Handle the case when executing the payment fails
+                return Redirect("/Payment/CheckoutFail");
+            }
         }
 
     }

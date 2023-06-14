@@ -96,6 +96,20 @@ namespace LAMovies_NET6.Repositories
                         _data.MovieGenres.Add(movieGenre);
                     }
                 }
+                var actorToDeleted = _data.MovieActors.Where(a => a.idMovie == model.idMovie && !model.Actor.Contains(a.idActor)).ToList();
+                foreach (var mActor in actorToDeleted)
+                {
+                    _data.MovieActors.Remove(mActor);
+                }
+                foreach (int actorId in model.Actor)
+                {
+                    var movieActor = _data.MovieActors.FirstOrDefault(a => a.idMovie == model.idMovie && a.idActor == actorId);
+                    if (movieActor == null)
+                    {
+                        movieActor = new MovieActor { idActor = actorId, idMovie = model.idMovie };
+                        _data.MovieActors.Add(movieActor);
+                    }
+                }
                 _data.Movies.Update(model);
                 _data.SaveChanges();
                 return true;
@@ -128,6 +142,11 @@ namespace LAMovies_NET6.Repositories
         public List<int> GetGenreByMovieId(int movieId)
         {
             var genreIds = _data.MovieGenres.Where(a => a.idMovie == movieId).Select(a => a.idGenre).ToList();
+            return genreIds;
+        }
+        public List<int> GetActorByMovieId(int movieId)
+        {
+            var genreIds = _data.MovieActors.Where(a => a.idMovie == movieId).Select(a => a.idActor).ToList();
             return genreIds;
         }
 
@@ -163,8 +182,13 @@ namespace LAMovies_NET6.Repositories
 
             if (!string.IsNullOrEmpty(term))
             {
+                DisplayGenresToMovie(list);
                 term = term.ToLower();
-                list = list.Where(a => a.nameMovie.ToLower().StartsWith(term)).ToList();
+                list = list.Where(a => a.nameMovie.ToLower().StartsWith(term) ||
+                                                  a.subLanguageMovie.ToLower().StartsWith(term) ||
+                                                  a.typeMovie.ToLower().StartsWith(term) ||
+                                                  a.ActorNames.Any(actor => actor.ToLower().StartsWith(term)) ||
+                                                  a.GenreNames.Any(genre => genre.ToLower().StartsWith(term))).ToList();
             }
 
             if (paging)
@@ -462,6 +486,18 @@ namespace LAMovies_NET6.Repositories
             var series = _data.SeriesMovies.FirstOrDefault(m => m.idSeries == idSeries);
             var movie = _data.Movies.FirstOrDefault(m => m.idMovie == series.idMovie);
             return movie;
+        }
+        public int CountMovie()
+        {
+            return _data.Movies.Count();
+        }
+        public int CountMovieOdd()
+        {
+            return _data.Movies.Count(m => m.typeMovie == "oddMovies");
+        }
+        public int CountMovieSeries()
+        {
+            return _data.Movies.Count(m => m.typeMovie == "seriesMovies");
         }
     }
 }

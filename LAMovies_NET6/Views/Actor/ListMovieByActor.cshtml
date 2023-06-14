@@ -1,13 +1,34 @@
 ﻿@model IEnumerable<LAMovies_NET6.Models.Movie>
-
+@using LAMovies_NET6.Models
 @{
+    var actor = ViewData["actor"] as Actor;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@if(actor != null)
+{
+    <section class="movie-detail">
+        <div class="container">
+
+            <figure class="movie-detail-banner">
+                <img src="@actor.avartaActor">
+            </figure>
+
+            <div class="movie-detail-content">
+
+                <h1 class="h1 detail-title">
+                    @actor.nameActor
+                </h1>
+                <p class="storyline">
+                    @actor.describeActor
+                </p>
+            </div>
+        </div>
+    </section>
     <section id="home" class="iq-main-slider pt-4">
         <div class="main-content">
             <section class="list-movies">
                 <div class="container">
-                    <h2 class="h2 section-title text-center">All Movies</h2>
+                    <h2 class="h2 section-title text-center">All Movies @actor.nameActor</h2>
                     <ul class="movies-list">
                         @foreach (var item in Model)
                         {
@@ -42,3 +63,4 @@
             </section>
         </div>
     </section>
+}

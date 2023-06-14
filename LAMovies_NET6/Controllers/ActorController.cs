@@ -72,7 +72,17 @@ namespace LAMovies_NET6.Controllers
         public IActionResult ListMovieByActor(string name)
         {
             var item = _actorRepository.GetActorByName(name);
+            ViewData["actor"]= item;
             var listMovie = _actorRepository.GetMoviesByActor(item.idActor);
+            return View(listMovie);
+        }
+
+        [Authorize(Roles = "admin")]
+        public IActionResult ShowListActor(int id)
+        {
+            var listMovie = _actorRepository.GetMoviesByActor(id);
+            var actor = _actorRepository.GetById(id);
+            ViewBag.nameActor = actor.nameActor;
             return View(listMovie);
         }
     }

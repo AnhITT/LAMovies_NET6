@@ -1,0 +1,56 @@
+﻿@model LAMovies_NET6.Models.Pricing
+@{
+    ViewData["Title"] = "Chỉnh sửa dịch vụ";
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item h5"><a asp-controller="Pricing" asp-action="QLPricing"><i class="fa-brands fa-servicestack"></i> Quản lý dịch vụ</a></li>
+            <li class="breadcrumb-item h5">Thêm dịch vụ</li>
+        </ol>
+    </nav>
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+<section class="bg-image">
+    <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+        <div class="container h-100">
+            <div class="row d-flex justify-content-center align-items-center">
+                <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+                    <div class="card" style="border-radius: 15px;">
+                        <div class="card-body p-5">
+                            <h2 class="text-uppercase text-center ">Sửa dịch vụ</h2>
+                            <form asp-action="EditPrice" method="post">
+                                <div>
+                                    <div>
+                                        Mã dịch vụ
+                                        <div>
+                                            <input type="text" class="form-control" asp-for="idPricing" readonly>
+                                        </div>
+                                    </div>
+                                    Tên dịch vụ
+                                    <div>
+                                        <input type="text" class="form-control" asp-for="namePricing">
+                                    </div>
+                                    Giá dịch vụ
+                                    <div>
+                                        <input type="text" class="form-control" asp-for="pricePricing">
+                                    </div>
+                                    Thời gian dịch vụ
+                                    <div>
+                                        <input type="text" class="form-control" asp-for="timePricing">
+                                    </div>
+                                </div>
+
+                                <div class="d-flex justify-content-center align-items-center">
+                                    <a class="btn btn-dark" asp-controller="Pricing" asp-action="QLPricing"><i class="fa-solid fa-chevron-left"></i> Quay lại</a>
+                                    <input type="submit" value="Sửa dịch vụ" class="btn btn-success m-3" />
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

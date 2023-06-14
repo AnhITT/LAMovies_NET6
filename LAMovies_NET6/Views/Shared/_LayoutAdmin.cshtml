@@ -8,7 +8,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
     <link href="~/assets/css/icons.min.css" rel="stylesheet" />
     <link href="~/assets/css/app-modern.min.css" rel="stylesheet" />
-    <title>Home - Admin</title>
+    <title>@ViewData["Title"]</title>
+
 </head>
 <body class="loading" data-layout="detached">
 
@@ -50,7 +51,7 @@
                         </div>
 
                         <!-- item-->
-                        <a href="/Admin/Admin/InfoAdmin" class="dropdown-item notify-item">
+                        <a asp-action="DisplayInfoUser" asp-controller="User" class="dropdown-item notify-item">
                             <i class="mdi mdi-account-circle me-1"></i>
                             <span>Thông tin cá nhân</span>
                         </a>
@@ -97,7 +98,7 @@
             <div class="leftside-menu leftside-menu-detached">
 
                 <div class="leftbar-user">
-                    <a href="/Admin/Admin/InfoAdmin">
+                    <a asp-action="DisplayInfoUser" asp-controller="User">
                         <img src="~/image/avarta/avatar-default.png" alt="user-image" height="42" class="rounded-circle shadow-sm">
                         <span class="leftbar-user-name">
                             @User.Identity.Name
@@ -180,13 +181,6 @@
             <div class="content-page">
                 <div class="content">
                     <!-- start page title -->
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="page-title-box">
-                                <h4 class="page-title">@ViewBag.Title</h4>
-                            </div>
-                        </div>
-                    </div>
                     <!-- end page title -->
                     <div class="row">
                         @RenderBody()

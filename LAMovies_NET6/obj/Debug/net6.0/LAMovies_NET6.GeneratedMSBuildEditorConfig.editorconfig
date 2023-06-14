@@ -32,6 +32,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWN0b3JcUUxBY3Rvci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Admin/source/repos/LAMovies_NET6/LAMovies_NET6/Views/Actor/ShowListActor.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWN0b3JcU2hvd0xpc3RBY3Rvci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Admin/source/repos/LAMovies_NET6/LAMovies_NET6/Views/Genre/AddGenre.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2VucmVcQWRkR2VucmUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -132,6 +136,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGF5bWVudFxWaWV3UGF5bWVudC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Admin/source/repos/LAMovies_NET6/LAMovies_NET6/Views/Pricing/AddPricing.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJpY2luZ1xBZGRQcmljaW5nLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Admin/source/repos/LAMovies_NET6/LAMovies_NET6/Views/Pricing/EditPrice.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJpY2luZ1xFZGl0UHJpY2UuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Admin/source/repos/LAMovies_NET6/LAMovies_NET6/Views/Pricing/Pricing.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJpY2luZ1xQcmljaW5nLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -196,8 +208,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9QYXJ0aWFsVG9wNU1vdmllVmlldy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Admin/source/repos/LAMovies_NET6/LAMovies_NET6/Views/User/ChangePassword.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxDaGFuZ2VQYXNzd29yZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Admin/source/repos/LAMovies_NET6/LAMovies_NET6/Views/User/DisplayInfoUser.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxEaXNwbGF5SW5mb1VzZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Admin/source/repos/LAMovies_NET6/LAMovies_NET6/Views/User/EditAccount.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxFZGl0QWNjb3VudC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Admin/source/repos/LAMovies_NET6/LAMovies_NET6/Views/User/EditInfoUser.cshtml]

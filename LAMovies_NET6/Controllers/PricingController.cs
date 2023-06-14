@@ -1,6 +1,7 @@
 ﻿using LAMovies_NET6.Interfaces;
 using LAMovies_NET6.Models;
 using LAMovies_NET6.Models.DTO;
+using LAMovies_NET6.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Data;
@@ -34,6 +35,41 @@ namespace LAMovies_NET6.Controllers
             return View(pricing);
         }
 
+        [Authorize(Roles = "admin")]
+        public IActionResult AddPricing()
+        {
+            return View();
+
+        }
+
+        [Authorize(Roles = "admin")]
+        [HttpPost]
+        public IActionResult AddPricing(Pricing model)
+        {
+                _pricingRepository.Add(model);
+                return Redirect("QLPricing");
+        }
+        [Authorize(Roles = "admin")]
+        public IActionResult EditPrice(int id)
+        {
+            var data = _pricingRepository.GetById(id);
+            return View(data);
+        }
+
+        [Authorize(Roles = "admin")]
+        [HttpPost]
+        public IActionResult EditPrice(Pricing model)
+        {
+            _pricingRepository.Update(model);
+            return RedirectToAction(nameof(QLPricing));
+
+        }
+        [Authorize(Roles = "admin")]
+        public IActionResult DeletePricing(int id)
+        {
+            var result = _pricingRepository.Delete(id);
+            return RedirectToAction(nameof(QLPricing));
+        }
         [Authorize(Roles = "admin")]
         public async Task<IActionResult> QLUserPricing()
         {

@@ -1,4 +1,5 @@
 ﻿using LAMovies_NET6.Interfaces;
+using LAMovies_NET6.Models;
 using LAMovies_NET6.Models.DTO;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
@@ -79,20 +80,67 @@ namespace LAMovies_NET6.Controllers
         }
         [Authorize]
         [HttpGet]
-        public async Task<IActionResult> DisplayInfoUser(int id)
+        public async Task<IActionResult> DisplayInfoUser()
         {
             var user = await _userAuthRepository.GetInfoAccount();
-            ViewBag.InfoUser = user;
-            return View();
+            return View(user);
+        }
+        [Authorize]
+        [HttpGet]
+        public async Task<IActionResult> ChangePassword()
+        {
+            var user = await _userAuthRepository.GetInfoAccount();
+            var checkPasswordDTO = new CheckPasswordDTO()
+            {
+                 id = user.Id,
+                 name = user.fullName,
+            };
+            return View(checkPasswordDTO);
+        }
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> ChangePassword(CheckPasswordDTO checkPasswordDTO)
+        {
+            if (!ModelState.IsValid) {
+                return View(checkPasswordDTO); 
+            }
+            var result = await _userAuthRepository.UpdatePassword(checkPasswordDTO);
+            if (result.statusCode == 1)
+            {
+                TempData["true"] = result.message;
+                return RedirectToAction(nameof(ChangePassword));
+            }
+            else
+            {
+                TempData["msg"] = result.message;
+                return RedirectToAction(nameof(ChangePassword));
+            }
+        }
+        [Authorize]
+        [HttpGet]
+        public async Task<IActionResult> EditInfoUser()
+        {
+            var user = await _userAuthRepository.GetInfoAccount();
+            return View(user);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> EditInfoUser(int id)
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> EditInfoUser(User user)
         {
-            var user = await _userAuthRepository.GetInfoAccount();
-            ViewBag.InfoUser = user;
-            return View();
+            var result = await _userAuthRepository.Update(user);
+            if (result)
+            {
+                return RedirectToAction(nameof(DisplayInfoUser));
+            }
+            else
+            {
+                TempData["msg"] = "Edit Error";
+                return View(user);
+            }
         }
+
+        [Authorize]
         public async Task<IActionResult> InfoServiceUser()
         {
             var pricing = await _pricingRepository.GetPricingByUser();
@@ -105,6 +153,33 @@ namespace LAMovies_NET6.Controllers
         {
             var account = _userAuthRepository.GetAllAccount();
             return View(account);
+        }
+        [Authorize(Roles = "admin")]
+        public async Task<IActionResult> DeleteAccount(String id)
+        {
+            var result = await _userAuthRepository.DeleteAccount(id);
+            return RedirectToAction(nameof(QLAccount));
+        }
+        [Authorize(Roles = "admin")]
+        public async Task<IActionResult> EditAccount(String id)
+        {
+            var user = await _userAuthRepository.GetAccountById(id);
+            return View(user);
+        }
+        [Authorize(Roles = "admin")]
+        [HttpPost]
+        public async Task<IActionResult> EditAccount(User user)
+        {
+            var result = await _userAuthRepository.Update(user);
+            if (result)
+            {
+                return RedirectToAction(nameof(QLAccount));
+            }
+            else
+            {
+                TempData["msg"] = "Edit Error";
+                return View(user);
+            }
         }
     }
 }

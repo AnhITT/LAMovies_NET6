@@ -11,6 +11,10 @@
             <section class="list-movies">
                 <div class="container">
                     <h2 class="h2 section-title text-center">List Movies</h2>
+                    @if (ViewBag.search != null)
+                    {
+                        <h3 class="section-title text-center">Search: "@ViewBag.search"</h3>
+                    }
                     <ul class="movies-list">
                         @foreach (var item in Model.MovieList)
                         {

@@ -1,24 +1,9 @@
-﻿
+﻿@model LAMovies_NET6.Models.User
 @{
     ViewData["Title"] = "Edit Profile";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@{
-    var userName = "";
-    var passWord = "";
-    var email = "";
-    var fullName = "";
-    DateTime? birthDay = null;
-    var user = ViewBag.InfoUser;
-    if (user != null)
-    {
-        userName = user.UserName;
-        email = user.Email;
-        fullName = user.fullName;
-        birthDay = user.dateBirthdayUser;
-        passWord = user.PasswordHash;
-    }
-}
+
 <section class="m-profile manage-p mb-5">
     <div class="container h-100">
         <div class="row align-items-center justify-content-center h-100">
@@ -37,33 +22,34 @@
                         <div class="col-lg-10 device-margin">
                             <div class="profile-from">
                                 <h4 class="mb-3">Manage Profile</h4>
-                                <form class="mt-4">
+                                <form asp-action="EditInfoUser" method="post" class="mt-4">
+                                    <input type="hidden" asp-for="@Model.Id" />
                                     <div class="form-group">
                                         <label>UserName</label>
                                         <input type="text" class="mb-0"
-                                               value="@userName" autocomplete="off" disabled>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Password</label>
-                                        <input type="text" class="mb-0"
-                                               placeholder="*******" autocomplete="off">
+                                               asp-for="@Model.UserName" readonly>
                                     </div>
                                     <div class="form-group">
                                         <label>Full Name</label>
-                                        <input type="text" class="mb-0" id="exampleInputl2" value="@fullName" />
+                                        <input type="text" class="mb-0" id="exampleInputl2" asp-for="@Model.fullName" />
                                     </div>
                                     <div class="form-group">
                                         <label>Email</label>
-                                        <input type="text" class="mb-0" id="exampleInputl2" value="@email" />
+                                        <input type="text" class="mb-0" id="exampleInputl2" asp-for="@Model.Email" />
                                     </div>
                                     <div class="form-group">
                                         <label>Date of Birth</label>
-                                        <input type="datetime" class="date-input basicFlatpickr mb-0"
-                                               id="exampleInputPassword2" value="@birthDay">
+                                        <input type="date" class="date-input basicFlatpickr mb-0"
+                                               id="exampleInputPassword2" asp-for="@Model.dateBirthdayUser">
                                     </div>
-                                   
+                                    @if (TempData["msg"] != null)
+                                    {
+                                        <div class="alert text-danger">
+                                            @TempData["msg"]
+                                        </div>
+                                    }
                                     <div class="d-flex justify-content-center">
-                                        <a href="#" class="btn btn-hover m-3">Save</a>
+                                        <button type="submit" href="#" class="btn btn-hover m-3">Save</button>
                                         <a asp-action="Index" asp-controller="Home" class="btn btn-link m-3">Cancel</a>
                                     </div>
                                 </form>
