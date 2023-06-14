@@ -28,9 +28,11 @@ namespace LAMovies_NET6.Interfaces
         List<HistoryMoviesDTO> GetHistoryMovies(List<Movie> movies);
         bool AddOddMovie(OddMovie model);
         bool AddSeriesMovie(SeriesMovie model);
+        bool UpdateSeriesMovie(SeriesMovie model);
         OddMovie GetOddMovieById(int id);
         bool UpdateOddMovie(OddMovie model);
         List<SeriesMovie> GetSeriesById(int id);
+        SeriesMovie GetSerieById(int id);
         MovieListDTO ListSeriesMovies(bool paging = false, int currentPage = 0);
         MovieListDTO ListOddMovies(bool paging = false, int currentPage = 0);
         OddMovie GetURLOddMovie(int id);

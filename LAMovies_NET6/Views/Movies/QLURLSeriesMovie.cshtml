@@ -25,7 +25,6 @@
                         <th>STT</th>
                         <th>Đường dẫn</th>
                         <th>Tập</th>
-                        <th>Số tập</th>
                         <th></th>
 
                     </tr>
@@ -43,7 +42,7 @@
                                 <td>@item.practice</td>
 
                                 <td>
-                                    <a asp-controller="Genre" asp-action="EditGenre" asp-route-id="@item.idSeries" class="btn btn-sm btn-primary"><i class="fa-solid fa-pen-to-square"></i></a>
+                                    <a asp-controller="Movies" asp-action="UpdateURLSeriesMovie" asp-route-id="@item.idSeries" class="btn btn-sm btn-primary"><i class="fa-solid fa-pen-to-square"></i></a>
                                     <a href="/Movies/DeleteURLSeriesMovie?id=@item.idSeries" onclick="return window.confirm('Xác nhận xoá?')" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
                                 </td>
                             </tr>

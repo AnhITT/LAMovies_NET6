@@ -440,12 +440,28 @@ namespace LAMovies_NET6.Repositories
         {
             return _data.SeriesMovies.Where(u => u.idMovie == id).ToList();
         }
-
+        public SeriesMovie GetSerieById(int id)
+        {
+            return _data.SeriesMovies.Find(id);
+        }
         public bool AddSeriesMovie(SeriesMovie model)
         {
             try
             {
                 _data.SeriesMovies.Add(model);
+                _data.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+        public bool UpdateSeriesMovie(SeriesMovie model)
+        {
+            try
+            {
+                _data.SeriesMovies.Update(model);
                 _data.SaveChanges();
                 return true;
             }

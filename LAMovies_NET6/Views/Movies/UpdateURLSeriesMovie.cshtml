@@ -1,0 +1,66 @@
+﻿@model LAMovies_NET6.Models.SeriesMovie
+@{
+    ViewData["Title"] = "Chỉnh sửa URL phim bộ";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item h5"><a asp-controller="Movies" asp-action="QLMovies"><i class="fa-solid fa-film"></i> Quản lý đường dẫn phim bộ</a></li>
+        <li class="breadcrumb-item h5">Chỉnh sửa URL phim bộ</li>
+    </ol>
+</nav>
+<section class="bg-image">
+    <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+        <div class="container h-100">
+            <div class="row d-flex justify-content-center align-items-center">
+                <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+                    <div class="card" style="border-radius: 15px;">
+                        <div class="card-body p-5">
+                            <h2 class="text-uppercase text-center ">Chỉnh sửa dẫn phim bộ</h2>
+                            <form asp-action="UpdateURLSeriesMovie" method="post" enctype="multipart/form-data">
+                                <div>
+                                    ID Phim
+                                    <div>
+                                        <input type="text" class="form-control" asp-for="idMovie" readonly>
+                                    </div>
+                                </div>
+                                <div>
+                                    ID đường dẫn
+                                    <div>
+                                        <input type="text" class="form-control" asp-for="idSeries" readonly>
+                                    </div>
+                                </div>
+                                <div>
+                                    Nhập đường dẫn
+                                    <div>
+                                        <input type="text" class="form-control" asp-for="urlMovie">
+                                        <span class="text-danger" asp-validation-for="urlMovie"> </span>
+                                    </div>
+                                </div>
+                                <div>
+                                    Nhập tập
+                                    <div>
+                                        <input type="text" class="form-control" asp-for="practice">
+                                        <span class="text-danger" asp-validation-for="practice"> </span>
+                                    </div>
+                                </div>
+
+                                @if (TempData["msg"] != null)
+                                {
+                                    <div class="alert text-danger">
+                                        @TempData["msg"]
+                                    </div>
+                                }
+                                <div class="d-flex justify-content-center align-items-center">
+                                    <a class="btn btn-dark" asp-controller="Movies" asp-action="QLURLSeriesMovie" asp-route-id="@Model.idMovie"><i class="fa-solid fa-chevron-left"></i> Quay lại</a>
+                                    <input type="submit" value="Chỉnh sửa URL phim" class="btn btn-success m-3" />
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

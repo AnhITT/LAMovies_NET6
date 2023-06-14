@@ -294,6 +294,29 @@ namespace LAMovies_NET6.Controllers
             }
         }
         [Authorize(Roles = "admin")]
+        [HttpGet]
+        public IActionResult UpdateURLSeriesMovie(int id)
+        {
+            var model = _movie.GetSerieById(id);
+            return View(model);
+        }
+
+        [Authorize(Roles = "admin")]
+        [HttpPost]
+        public IActionResult UpdateURLSeriesMovie(SeriesMovie model)
+        {
+            var result = _movie.UpdateSeriesMovie(model);
+            if (result)
+            {
+                return RedirectToAction(nameof(QLURLSeriesMovie), new { id = model.idMovie });
+            }
+            else
+            {
+                TempData["msg"] = "Add Error";
+                return View("AddURLOddMovie", model);
+            }
+        }
+        [Authorize(Roles = "admin")]
         public IActionResult DeleteURLSeriesMovie(int id)
         {
             var movie = _movie.FindMovieByIdSeries(id);
